@@ -1,8 +1,8 @@
 .category-title {
-  padding-left: 2rem;
-  padding-top: 2rem;
+  position: absolute;
+  left: @padding-menu-button;
+  top: @padding-menu-button;
   margin: 0;
-  background-color: #e7e7e7;
 }
 
 .category-elems {
@@ -12,14 +12,11 @@
 }
 
 .category-elem {
-  position: relative;
   width: 100%;
   height: 100vh;
   text-align: center;
 
-  background-color: #e7e7e7;
-
-  &:first-child {
-    padding-top: 10vh;
-  }
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
 }

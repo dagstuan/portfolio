@@ -12,8 +12,8 @@ class Layout extends Component {
     super();
     this.state = {
       menuOpen: false,
+      dark: false,
     };
-    this.menuOpen = false;
   }
 
   toggleMenu = () => {
@@ -24,8 +24,12 @@ class Layout extends Component {
     this.setState({ menuOpen: false });
   };
 
+  toggleDark = () => {
+    this.setState({ dark: !this.state.dark });
+  };
+
   render() {
-    const { menuOpen } = this.state;
+    const { menuOpen, dark } = this.state;
 
     const {
       children,
@@ -34,12 +38,13 @@ class Layout extends Component {
 
     const wrapperClass = classNames('wrapper', {
       'wrapper--menu-open': menuOpen,
+      'wrapper--dark': dark,
     });
 
     return (
       <main className={wrapperClass}>
         <Helmet
-          title="foo"
+          title="Dag Stuan"
           meta={[{ name: 'description', content: 'Portfolio' }]}
         >
           <link

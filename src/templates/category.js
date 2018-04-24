@@ -1,6 +1,12 @@
 import React from 'react';
 import Img from 'gatsby-image';
 
+const width = '85%';
+const height = '80vh';
+
+const paddingTopBottomPx = 22;
+const paddingLeftRightPx = 35;
+
 const Category = ({ data }) => {
   const {
     contentfulCategory: { title, images },
@@ -16,24 +22,24 @@ const Category = ({ data }) => {
               <Img
                 resolutions={image.resolutions}
                 alt={image.title}
-                title={image.title}
                 fadeIn={false}
                 style={{
-                  width: '85%',
-                  height: '80vh',
-                  padding: '20px',
+                  width: `${width}`,
+                  height: `${height}`,
+                  paddingLeft: `${paddingLeftRightPx}px`,
+                  paddingRight: `${paddingLeftRightPx}px`,
                 }}
                 imgStyle={{
-                  marginTop: '20px',
-                  marginLeft: '20px',
-                  width: 'calc(100% - 40px)',
-                  height: 'calc(80vh - 20px)',
+                  marginTop: `${paddingTopBottomPx}px`,
+                  marginBottom: `${paddingTopBottomPx}px`,
+                  marginLeft: `${paddingLeftRightPx}px`,
+                  width: `calc(100% - ${paddingLeftRightPx * 2}px)`,
+                  height: `calc(${height} - ${paddingTopBottomPx * 2}px)`,
                   objectFit: 'contain',
-                  transition: 'translate3d(0,0,0)',
                   filter: `drop-shadow(0px 0px 1px rgba(0,0,0,.3))
                            drop-shadow(0px 0px 10px rgba(0,0,0,.3))`,
                 }}
-                backgroundColor={'#e7e7e7'}
+                backgroundColor="transparent"
               />
             </li>
           ))}
@@ -51,7 +57,7 @@ export const query = graphql`
       images {
         title
         description
-        resolutions(width: 1000) {
+        resolutions(width: 700) {
           # Choose either the fragment including a small base64ed image, a traced placeholder SVG, or one without.
           ...GatsbyContentfulResolutions_withWebp_noBase64
         }

@@ -8,6 +8,9 @@ html {
 }
 
 .wrapper {
+  background-color: @color--white;
+  .transition(background-color);
+
   &:after {
     content: "";
     position: fixed;
@@ -19,13 +22,23 @@ html {
     width: 100%;
     background: @color--gray;
     opacity: 0;
+    visibility: hidden;
     z-index: 99;
     transform: translate3d(0,0,0);
 
-    .transition(opacity);
+    transition: visibility .5s linear 0s, opacity .5s;
+    transition-timing-function: cubic-bezier(.84,0,.22,1);
+  }
+
+  &--dark {
+    background-color: black;
   }
 }
 
 .wrapper--menu-open:after {
+  visibility: visible;
   opacity: .5;
+
+  transition: visibility .5s linear 0s, opacity .5s;
+  transition-timing-function: cubic-bezier(.84,0,.22,1);
 }
