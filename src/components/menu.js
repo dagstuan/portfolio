@@ -29,7 +29,7 @@ const Menu = ({ categories, menuOpen, toggleMenu, closeMenu }) => {
       </button>
       <nav className={menuClass}>
         <ul className="menu__elems">
-          <MenuElem href="/" text="Home" onClick={closeMenu} />
+          <MenuElem text="Home" onClick={closeMenu} />
           {categories.map(({ node }) => (
             <MenuElem
               key={node.slug}
