@@ -4,7 +4,7 @@ import classNames from 'classnames';
 
 const MenuElem = ({ href, text, onClick }) => (
   <li className="menu__elem">
-    <Link className="menu__elem__link" to={href} onClick={onClick}>
+    <Link className="menu__elem__link" to={`/${href}`} onClick={onClick}>
       {text}
     </Link>
   </li>
