@@ -5,12 +5,12 @@
   "author": "Dag Stuan <d.stuan@gmail.com>",
   "dependencies": {
     "classnames": "^2.2.5",
-    "gatsby": "^1.9.247",
+    "gatsby": "^1.9.254",
     "gatsby-image": "^1.0.47",
-    "gatsby-link": "^1.6.40",
+    "gatsby-link": "^1.6.41",
     "gatsby-plugin-less": "^1.1.8",
     "gatsby-plugin-nprogress": "^1.0.14",
-    "gatsby-plugin-react-helmet": "^2.0.10",
+    "gatsby-plugin-react-helmet": "^2.0.11",
     "gatsby-source-contentful": "^1.3.47",
     "react-helmet": "^5.2.0"
   },
@@ -25,6 +25,6 @@
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "devDependencies": {
-    "prettier": "^1.12.0"
+    "prettier": "^1.12.1"
   }
 }
