@@ -48,7 +48,7 @@ class Layout extends Component {
           meta={[{ name: 'description', content: 'Portfolio' }]}
         >
           <link
-            href="https://fonts.googleapis.com/css?family=Cookie|Open+Sans|PT+Sans"
+            href="https://fonts.googleapis.com/css?family=Cinzel:400,700|Open+Sans|PT+Sans"
             rel="stylesheet"
           />
         </Helmet>

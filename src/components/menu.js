@@ -2,6 +2,14 @@ import React from 'react';
 import Link from 'gatsby-link';
 import classNames from 'classnames';
 
+const MenuElem = ({ href, text, onClick }) => (
+  <li className="menu__elem">
+    <Link className="menu__elem__link" to={href} onClick={onClick}>
+      {text}
+    </Link>
+  </li>
+);
+
 const Menu = ({ categories, menuOpen, toggleMenu, closeMenu }) => {
   const toggleClass = classNames('menu-toggle', {
     'menu-toggle--menu-open': menuOpen,
@@ -21,17 +29,14 @@ const Menu = ({ categories, menuOpen, toggleMenu, closeMenu }) => {
       </button>
       <nav className={menuClass}>
         <ul className="menu__elems">
-          <li>
-            <Link className="menu__elem" to="/" onClick={closeMenu}>
-              Home
-            </Link>
-          </li>
+          <MenuElem href="/" text="Home" onClick={closeMenu} />
           {categories.map(({ node }) => (
-            <li key={node.slug}>
-              <Link className="menu__elem" to={node.slug} onClick={closeMenu}>
-                {node.title}
-              </Link>
-            </li>
+            <MenuElem
+              key={node.slug}
+              href={node.slug}
+              text={node.title}
+              onClick={closeMenu}
+            />
           ))}
         </ul>
       </nav>

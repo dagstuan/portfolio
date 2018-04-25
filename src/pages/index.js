@@ -9,10 +9,23 @@ const IndexPage = ({ data }) => {
     <div className="home">
       <Img
         sizes={cover.sizes}
-        outerWrapperClassName="home__background__wrapper"
-        className="home__background"
+        style={{
+          width: '100%',
+          margin: '12vh auto',
+          position: 'absolute',
+          top: 0,
+          bottom: 0,
+        }}
       />
-      <h1 className="home__title">{title}</h1>
+      <div className="title__wrapper">
+        <h1 className="title">
+          <span className="title__name">
+            <span className="title__first-name">Dag</span>
+            <span className="title__last-name">Stuan</span>
+          </span>
+          <span className="title__sub-title">PHOTOGRAPHY</span>
+        </h1>
+      </div>
     </div>
   );
 };
@@ -22,7 +35,7 @@ export const query = graphql`
     contentfulHome {
       title
       cover {
-        sizes(maxHeight: 4000, maxWidth: 4000) {
+        sizes(maxHeight: 4000, maxWidth: 4000, quality: 100) {
           ...GatsbyContentfulSizes_withWebp
         }
       }

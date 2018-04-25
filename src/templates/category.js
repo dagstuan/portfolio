@@ -14,7 +14,10 @@ const Category = ({ data }) => {
 
   return (
     <div>
-      <h1 className="category-title">{title}</h1>
+      <div className="title__wrapper">
+        <h1 className="title">{title}</h1>
+      </div>
+
       {images && (
         <ul className="category-elems">
           {images.map((image, index) => (
@@ -37,7 +40,7 @@ const Category = ({ data }) => {
                   height: `calc(${height} - ${paddingTopBottomPx * 2}px)`,
                   objectFit: 'contain',
                   filter: `drop-shadow(0px 0px 1px rgba(0,0,0,.3))
-                           drop-shadow(0px 0px 10px rgba(0,0,0,.3))`,
+                           drop-shadow(0px 0px 5px rgba(0,0,0,.3))`,
                 }}
                 backgroundColor="transparent"
               />

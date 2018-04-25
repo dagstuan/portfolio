@@ -1,7 +1,7 @@
 .category-title {
   position: absolute;
-  left: @padding-menu-button;
-  top: @padding-menu-button;
+  left: @space-left-right;
+  top: @space-top;
   margin: 0;
 }
 
@@ -19,4 +19,8 @@
   display: flex;
   flex-direction: column;
   justify-content: center;
+
+  &:first-child {
+    padding-top: 3vh;
+  }
 }

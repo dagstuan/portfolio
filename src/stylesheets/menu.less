@@ -1,8 +1,7 @@
 @menu-width: 30vw;
 
-@toggle-size: 3.75rem;
-@toggle-icon-width: 40%;
-@toggle-icon-height: 30%;
+@toggle-icon-width: 1.5rem;
+@toggle-icon-height: 1.125rem;
 
 @toggle-icon-padding: (100% - @toggle-icon-width) / 2;
 
@@ -11,14 +10,14 @@
   outline: 0;
   position: fixed;
   z-index: 9999;
-  top: @padding-menu-button;
-  right: @padding-menu-button;
+  top: 0;
   margin: 0;
   padding: 0;
+  right: @space-left-right;
   border: none;
-  width: @toggle-size;
-  height: @toggle-size;
-  background: rgba(255, 255, 255, 0.9);
+  width: @toggle-icon-width;
+  height: @space-top;
+  background: transparent;
 
   &__label {
     display: none;
@@ -101,6 +100,14 @@
   z-index: 100;
   transform: translate3d(100%, 0, 0);
 
+  @media only screen and (max-width: 1200px) {
+    width: 50%;
+  }
+
+  @media only screen and (max-width: 600px) {
+      width: 100%;
+  }
+
   .transition(transform);
 
   &--open {
@@ -109,17 +116,20 @@
 
   &__elems {
     padding-top: 10rem;
-    padding-right: @padding-menu-button + (@toggle-size * (@toggle-icon-padding / 100));
     text-align: right;
-    font-family: 'PT Sans', sans-serif;
+    font-family: @font-family-headers;
     list-style-type: none;
+    margin-right: @space-left-right;
   }
 
   &__elem {
-    font-size: @font-size--menu;
-    text-decoration: none;
-    text-transform: capitalize;
-    font-weight: 700;
-    color: @color--black;
+    margin-bottom: 0.5rem;
+
+    &__link {
+      font-size: @font-size--menu;
+      text-transform: capitalize;
+      color: @color--black;
+      text-decoration: none;
+    }
   }
 }
