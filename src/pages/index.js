@@ -3,12 +3,15 @@ import Link from 'gatsby-link';
 import Img from 'gatsby-image';
 
 const IndexPage = ({ data }) => {
-  const { title, cover } = data.contentfulHome;
+  const {
+    title,
+    cover: { image },
+  } = data.contentfulHome;
 
   return (
     <div className="home">
       <Img
-        sizes={cover.sizes}
+        sizes={image.sizes}
         style={{
           width: '100%',
           margin: '12vh auto',
@@ -35,8 +38,10 @@ export const query = graphql`
     contentfulHome {
       title
       cover {
-        sizes(maxHeight: 4000, maxWidth: 4000, quality: 100) {
-          ...GatsbyContentfulSizes_withWebp
+        image {
+          sizes(maxHeight: 4000, maxWidth: 4000, quality: 100) {
+            ...GatsbyContentfulSizes_withWebp
+          }
         }
       }
     }

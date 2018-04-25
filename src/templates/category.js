@@ -23,7 +23,7 @@ const Category = ({ data }) => {
           {images.map((image, index) => (
             <li className="category-elem" key={index}>
               <Img
-                resolutions={image.resolutions}
+                resolutions={image.image.resolutions}
                 alt={image.title}
                 fadeIn={false}
                 style={{
@@ -59,10 +59,11 @@ export const query = graphql`
       slug
       images {
         title
-        description
-        resolutions(width: 700) {
-          # Choose either the fragment including a small base64ed image, a traced placeholder SVG, or one without.
-          ...GatsbyContentfulResolutions_withWebp_noBase64
+        image {
+          resolutions(width: 700) {
+            # Choose either the fragment including a small base64ed image, a traced placeholder SVG, or one without.
+            ...GatsbyContentfulResolutions_withWebp_noBase64
+          }
         }
       }
     }
