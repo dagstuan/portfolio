@@ -2,6 +2,8 @@ import React from 'react';
 import Link from 'gatsby-link';
 import Img from 'gatsby-image';
 
+import logo from '../assets/logo.svg';
+
 const IndexPage = ({ data }) => {
   const {
     title,
@@ -21,13 +23,7 @@ const IndexPage = ({ data }) => {
         }}
       />
       <div className="title__wrapper">
-        <h1 className="title">
-          <span className="title__name">
-            <span className="title__first-name">Dag</span>
-            <span className="title__last-name">Stuan</span>
-          </span>
-          <span className="title__sub-title">PHOTOGRAPHY</span>
-        </h1>
+        <img src={logo} alt="Dag Stuan Photography" />
       </div>
     </div>
   );
