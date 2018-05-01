@@ -38,8 +38,6 @@ const Category = ({ data }) => {
                   width: `calc(100% - ${paddingLeftRightPx * 2}px)`,
                   height: `calc(${height} - ${paddingTopBottomPx * 2}px)`,
                   objectFit: 'contain',
-                  filter: `drop-shadow(0px 0px 1px rgba(0,0,0,.3))
-                           drop-shadow(0px 0px 5px rgba(0,0,0,.3))`,
                 }}
                 backgroundColor="transparent"
               />
@@ -59,7 +57,7 @@ export const query = graphql`
       images {
         title
         image {
-          resolutions(width: 700) {
+          resolutions(width: 800, quality: 80) {
             # Choose either the fragment including a small base64ed image, a traced placeholder SVG, or one without.
             ...GatsbyContentfulResolutions_withWebp
           }
