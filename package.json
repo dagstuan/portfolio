@@ -8,6 +8,7 @@
     "gatsby": "^1.9.256",
     "gatsby-image": "^1.0.48",
     "gatsby-link": "^1.6.41",
+    "gatsby-plugin-google-analytics": "^1.0.31",
     "gatsby-plugin-less": "^1.1.8",
     "gatsby-plugin-nprogress": "^1.0.14",
     "gatsby-plugin-react-helmet": "^2.0.11",
