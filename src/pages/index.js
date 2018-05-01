@@ -23,7 +23,11 @@ const IndexPage = ({ data }) => {
         }}
       />
       <div className="title__wrapper">
-        <img className="title" src={logo} alt="Dag Stuan Photography" />
+        <img
+          className="title home__logo-image"
+          src={logo}
+          alt="Dag Stuan Photography"
+        />
       </div>
     </div>
   );
