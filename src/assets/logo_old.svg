@@ -1,0 +1,32 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="169" height="56.13" viewBox="0 0 169 56.13">
+  <defs>
+    <style type="text/css">
+      @import url('https://fonts.googleapis.com/css?family=Cinzel');
+      text {
+        font-family: "Cinzel";
+      }
+      .dagstuan {
+        font-size: 32px;
+      }
+      .dag {
+        fill: #a6a6a6
+      }
+      .stuan {
+        fill: #737373;
+      }
+      .line {
+        stroke: #737373;
+      }
+      .photography {
+        font-size: 22.8px;
+        fill: #a6a6a6;
+      }
+    </style>
+  </defs>
+  <title>Dag Stuan Photography</title>
+  <text class="dagstuan" transform="translate(0 24)">
+    <tspan class="dag">Dag</tspan><tspan class="stuan">Stuan</tspan>
+  </text>
+  <line class="line" x1="1" y1="28" x2="168" y2="28" />
+  <text class="photography" transform="translate(1 48)">Photography</text>
+</svg>
