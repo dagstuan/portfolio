@@ -130,6 +130,31 @@
       text-transform: capitalize;
       color: @color--black;
       text-decoration: none;
+
+      &:hover {
+        color: @color--gray;
+      }
+    }
+
+    &__icons {
+      display: flex;
+      justify-content: flex-end;
+      align-items: center;
+    }
+
+    &__icon {
+      width: 2rem;
+      height: 2rem;
+      fill: @color--black;
+
+      &:hover {
+        fill: @color--gray;
+      }
+
+      &--facebook {
+        width: 1.8rem;
+        height: 1.8rem;
+      }
     }
   }
 }
