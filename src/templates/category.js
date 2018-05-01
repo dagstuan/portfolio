@@ -25,7 +25,6 @@ const Category = ({ data }) => {
               <Img
                 resolutions={image.image.resolutions}
                 alt={image.title}
-                fadeIn={false}
                 style={{
                   width: `${width}`,
                   height: `${height}`,
@@ -62,7 +61,7 @@ export const query = graphql`
         image {
           resolutions(width: 700) {
             # Choose either the fragment including a small base64ed image, a traced placeholder SVG, or one without.
-            ...GatsbyContentfulResolutions_withWebp_noBase64
+            ...GatsbyContentfulResolutions_withWebp
           }
         }
       }
