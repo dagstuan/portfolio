@@ -37,18 +37,22 @@ class Layout extends Component {
     } = this.props;
 
     const wrapperClass = classNames('wrapper', {
-      'wrapper--menu-open': menuOpen,
       'wrapper--dark': dark,
+    });
+
+    const menuOverlayClass = classNames('menu-open-overlay', {
+      'menu-open-overlay--menu-open': menuOpen,
     });
 
     return (
       <main className={wrapperClass}>
+        <div className={menuOverlayClass} onClick={this.closeMenu} />
         <Helmet
           title="Dag Stuan"
           meta={[{ name: 'description', content: 'Portfolio' }]}
         >
           <link
-            href="https://fonts.googleapis.com/css?family=Cinzel:400,700|Open+Sans|PT+Sans"
+            href="https://fonts.googleapis.com/css?family=Cinzel:400,700|Lato"
             rel="stylesheet"
           />
         </Helmet>

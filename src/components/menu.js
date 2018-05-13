@@ -38,6 +38,7 @@ const Menu = ({ categories, menuOpen, toggleMenu, closeMenu }) => {
               onClick={closeMenu}
             />
           ))}
+          <MenuElem href="about" text="About" onClick={closeMenu} />
           <li className="menu__elem menu__elem__icons">
             <a href="https://www.facebook.com/dstuan">
               <svg
