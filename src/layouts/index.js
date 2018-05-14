@@ -8,13 +8,18 @@ import Lightbulb from '../components/lightbulb';
 
 import '../stylesheets/styles.less';
 
+const windowGlobal = typeof window !== 'undefined' && window;
+
 class Layout extends Component {
   constructor() {
     super();
 
     let initialDarkState = false;
 
-    if (window.localStorage && window.localStorage.getItem('dark') === 'true') {
+    if (
+      windowGlobal.localStorage &&
+      windowGlobal.localStorage.getItem('dark') === 'true'
+    ) {
       initialDarkState = true;
     }
 
@@ -35,8 +40,8 @@ class Layout extends Component {
   toggleDark = () => {
     const newDarkState = !this.state.dark;
 
-    if (window.localStorage) {
-      window.localStorage.setItem('dark', newDarkState);
+    if (windowGlobal.localStorage) {
+      windowGlobal.localStorage.setItem('dark', newDarkState);
     }
 
     this.setState({ dark: !this.state.dark });
