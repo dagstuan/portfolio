@@ -10,11 +10,16 @@ const AboutPage = ({ data }) => {
   } = data.contentfulAbout;
 
   return (
-    <div className="about">
-      <div className="about__image">
-        <Img resolutions={image.resolutions} />
+    <div className="about__wrapper">
+      <div className="about">
+        <div className="about__image">
+          <Img resolutions={image.resolutions} />
+        </div>
+        <div
+          className="about__text"
+          dangerouslySetInnerHTML={{ __html: html }}
+        />
       </div>
-      <div className="about__text" dangerouslySetInnerHTML={{ __html: html }} />
     </div>
   );
 };
