@@ -1,10 +1,12 @@
 .about {
   width: 60vw;
+  height: 80vh;
   display: flex;
+  flex-direction: row-reverse;
   align-items: center;
 
   &__wrapper {
-    height: 80vh;
+    height: 100vh;
     display: flex;
     justify-content: center;
   }
@@ -19,6 +21,25 @@
 
     h1 {
       margin-top: 0;
+    }
+  }
+
+  @media only screen and (max-width: 1200px) {
+    width: 75vw;
+  }
+
+  @media only screen and (max-width: 750px) {
+    width: 80vw;
+    margin-top: 3rem;
+    display: block;
+
+    &__text {
+      margin-bottom: 1rem;
+    }
+
+    &__image {
+      width: 100%;
+      margin-right: 0;
     }
   }
 }

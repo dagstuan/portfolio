@@ -1,0 +1,53 @@
+.lightbulb {
+  &__wrapper {
+    position: fixed;
+
+    right: @space-left-right;
+    height: @space-top;
+    bottom: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  &__button {
+    margin: 0;
+    padding: 0;
+    border: 0;
+    background: initial;
+    outline: 0;
+
+    &:hover {
+      cursor: pointer;
+    }
+  }
+
+  &__icon {
+    width: 2rem;
+    height: 2rem;
+
+    &:hover path {
+      fill: @color--gray;
+    }
+
+    .sun, .moon {
+      transition: opacity 0.5s, fill 0.25s;
+      transition-timing-function: cubic-bezier(.84,0,.22,1);
+    }
+
+    .sun {
+      fill: @color--black;
+      opacity: 0;
+    }
+    
+    .moon {
+      fill: @color--white;
+      opacity: 0;
+    }
+
+    .visible {
+      opacity: 1;
+    }
+  }
+}
+

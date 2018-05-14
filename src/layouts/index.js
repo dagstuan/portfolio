@@ -4,15 +4,23 @@ import Helmet from 'react-helmet';
 import classNames from 'classnames';
 
 import Menu from '../components/menu';
+import Lightbulb from '../components/lightbulb';
 
 import '../stylesheets/styles.less';
 
 class Layout extends Component {
   constructor() {
     super();
+
+    let initialDarkState = false;
+
+    if (window.localStorage && window.localStorage.getItem('dark') === 'true') {
+      initialDarkState = true;
+    }
+
     this.state = {
       menuOpen: false,
-      dark: false,
+      dark: initialDarkState,
     };
   }
 
@@ -25,6 +33,12 @@ class Layout extends Component {
   };
 
   toggleDark = () => {
+    const newDarkState = !this.state.dark;
+
+    if (window.localStorage) {
+      window.localStorage.setItem('dark', newDarkState);
+    }
+
     this.setState({ dark: !this.state.dark });
   };
 
@@ -37,7 +51,7 @@ class Layout extends Component {
     } = this.props;
 
     const wrapperClass = classNames('wrapper', {
-      'wrapper--dark': dark,
+      'dark-mode': dark,
     });
 
     const menuOverlayClass = classNames('menu-open-overlay', {
@@ -65,6 +79,8 @@ class Layout extends Component {
         />
 
         {children()}
+
+        <Lightbulb on={!dark} toggleOn={this.toggleDark} />
       </main>
     );
   }

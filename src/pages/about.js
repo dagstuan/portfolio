@@ -12,13 +12,13 @@ const AboutPage = ({ data }) => {
   return (
     <div className="about__wrapper">
       <div className="about">
-        <div className="about__image">
-          <Img resolutions={image.resolutions} />
-        </div>
         <div
           className="about__text"
           dangerouslySetInnerHTML={{ __html: html }}
         />
+        <div className="about__image">
+          <Img resolutions={image.resolutions} />
+        </div>
       </div>
     </div>
   );

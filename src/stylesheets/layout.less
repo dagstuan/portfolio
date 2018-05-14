@@ -3,7 +3,7 @@ html, body {
   background-color: @color--white;
 }
 
-h1, h2, h3 {
+h1, h2, h3 { 
   font-weight: normal;
   font-family: @font-family-headers;
 }
@@ -31,6 +31,11 @@ ul {
 li {
   font-size: @font-size--normal;
   margin-bottom: 0.3rem;
+}
+
+h1, h2, h3, p, li {
+  transition: color .5s;
+  transition-timing-function: cubic-bezier(.84,0,.22,1);
 }
 
 a {
@@ -76,9 +81,12 @@ p {
 }
 
 .wrapper {
-  &--dark {
-    background-color: black;
-  }
+  transition: background-color .5s linear 0s, opacity .5s;
+  transition-timing-function: cubic-bezier(.84,0,.22,1);
+}
+
+.dark-mode {
+  background-color: @color--black;
 }
 
 .title__wrapper {
@@ -97,4 +105,14 @@ p {
   display: block;
   font-weight: normal;
   font-family: @font-family-headers;
+}
+
+.dark-mode {
+  h1, h2, h3, p, li, a {
+    color: @color--white;
+  }
+
+  a:hover {
+    color: @color--gray-light;
+  }
 }
