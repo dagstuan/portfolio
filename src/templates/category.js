@@ -57,7 +57,7 @@ export const query = graphql`
       images {
         title
         image {
-          resolutions(width: 800, quality: 80) {
+          resolutions(width: 1600, quality: 90) {
             # Choose either the fragment including a small base64ed image, a traced placeholder SVG, or one without.
             ...GatsbyContentfulResolutions_withWebp
           }
