@@ -26,22 +26,30 @@
     width: 2rem;
     height: 2rem;
 
-    &:hover path {
-      fill: @color--gray;
+    &:hover {
+      .moon {
+        fill: #DAA520;
+      }
+      
+      .sun {
+        fill: #FFD700;
+      }
     }
 
     .sun, .moon {
-      transition: opacity 0.5s, fill 0.25s;
+      fill: transparent;
+      stroke-width: 10px;
+      transition: opacity 0.5s, fill 0.25s, stroke 0.25s;
       transition-timing-function: cubic-bezier(.84,0,.22,1);
     }
 
     .sun {
-      fill: @color--black;
+      stroke: @color--white;
       opacity: 0;
     }
     
     .moon {
-      fill: @color--white;
+      stroke: @color--black;
       opacity: 0;
     }
 
