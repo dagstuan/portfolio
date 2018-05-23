@@ -15,8 +15,8 @@ class CategoryElem extends React.Component {
     this.state = {
       imageWidth: 0,
       imageHeight: 0,
-      containerWidth: 1,
-      containerHeight: 1,
+      containerWidth: 0,
+      containerHeight: 0,
     };
   }
 
