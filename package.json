@@ -5,7 +5,7 @@
   "author": "Dag Stuan <d.stuan@gmail.com>",
   "dependencies": {
     "classnames": "^2.2.5",
-    "gatsby": "^1.9.260",
+    "gatsby": "^1.9.261",
     "gatsby-image": "^1.0.51",
     "gatsby-link": "^1.6.44",
     "gatsby-plugin-google-analytics": "^1.0.31",

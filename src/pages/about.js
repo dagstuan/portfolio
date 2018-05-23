@@ -17,7 +17,7 @@ const AboutPage = ({ data }) => {
           dangerouslySetInnerHTML={{ __html: html }}
         />
         <div className="about__image">
-          <Img resolutions={image.resolutions} />
+          <Img sizes={image.sizes} />
         </div>
       </div>
     </div>
@@ -33,8 +33,8 @@ export const query = graphql`
         }
       }
       image {
-        resolutions(width: 250, quality: 100) {
-          ...GatsbyContentfulResolutions_withWebp
+        sizes(maxWidth: 400, quality: 100) {
+          ...GatsbyContentfulSizes_withWebp
         }
       }
     }
