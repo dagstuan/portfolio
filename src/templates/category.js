@@ -7,6 +7,104 @@ const height = '80vh';
 const paddingTopBottomPx = 22;
 const paddingLeftRightPx = 35;
 
+class CategoryElem extends React.Component {
+  constructor() {
+    super();
+    this.containerRef = null;
+
+    this.state = {
+      imageWidth: 0,
+      imageHeight: 0,
+      containerWidth: 1,
+      containerHeight: 1,
+    };
+  }
+
+  setContainerRef = el => (this.containerRef = el);
+
+  componentDidMount() {
+    this.updateDimensions();
+    window.addEventListener('resize', this.updateDimensions);
+  }
+
+  componentWillUnmount() {
+    window.removeEventListener('resize', this.updateDimensions);
+  }
+
+  getImageAspectRatio = () => {
+    const { image } = this.props;
+
+    const imageWidth = Math.min(
+      image.image.resolutions.width,
+      image.image.file.details.image.width
+    );
+    const imageHeight = imageWidth / image.image.resolutions.aspectRatio;
+
+    return imageWidth / imageHeight;
+  };
+
+  updateDimensions = () => {
+    const { containerWidth, containerHeight } = this.state;
+
+    const newContainerWidth = this.containerRef.offsetWidth;
+    const newContainerHeight = this.containerRef.offsetHeight;
+
+    if (
+      containerWidth === newContainerWidth &&
+      containerHeight === newContainerHeight
+    ) {
+      return;
+    }
+
+    const aspectRatio = this.getImageAspectRatio();
+
+    const style = {
+      containerWidth: newContainerWidth,
+      containerHeight: newContainerHeight,
+    };
+
+    if (newContainerWidth / newContainerHeight > aspectRatio) {
+      style.imageHeight = newContainerHeight + 'px';
+      style.imageWidth = (newContainerHeight * aspectRatio).toString() + 'px';
+    } else {
+      style.imageWidth = newContainerWidth + 'px';
+      style.imageHeight = (newContainerWidth / aspectRatio).toString() + 'px';
+    }
+
+    this.setState(style);
+  };
+
+  render() {
+    const { image } = this.props;
+
+    const { imageWidth, imageHeight } = this.state;
+
+    return (
+      <li className="category-elem">
+        <div
+          className="category-elem__image-outer-wrapper"
+          ref={this.setContainerRef}
+        >
+          <div
+            className="category-elem__image-wrapper"
+            style={{
+              width: imageWidth,
+              height: imageHeight,
+            }}
+          >
+            <Img
+              resolutions={image.image.resolutions}
+              alt={image.title}
+              outerWrapperClassName="category-elem__image"
+              style={{ width: '100%', height: '100%' }}
+            />
+          </div>
+        </div>
+      </li>
+    );
+  }
+}
+
 const Category = ({ data }) => {
   const {
     contentfulCategory: { title, images },
@@ -21,27 +119,7 @@ const Category = ({ data }) => {
       {images && (
         <ul className="category-elems">
           {images.map((image, index) => (
-            <li className="category-elem" key={index}>
-              <Img
-                resolutions={image.image.resolutions}
-                alt={image.title}
-                style={{
-                  width: `${width}`,
-                  height: `${height}`,
-                  paddingLeft: `${paddingLeftRightPx}px`,
-                  paddingRight: `${paddingLeftRightPx}px`,
-                }}
-                imgStyle={{
-                  marginTop: `${paddingTopBottomPx}px`,
-                  marginBottom: `${paddingTopBottomPx}px`,
-                  marginLeft: `${paddingLeftRightPx}px`,
-                  width: `calc(100% - ${paddingLeftRightPx * 2}px)`,
-                  height: `calc(${height} - ${paddingTopBottomPx * 2}px)`,
-                  objectFit: 'contain',
-                }}
-                backgroundColor="transparent"
-              />
-            </li>
+            <CategoryElem key={index} image={image} />
           ))}
         </ul>
       )}
@@ -58,8 +136,15 @@ export const query = graphql`
         title
         image {
           resolutions(width: 1600, quality: 90) {
-            # Choose either the fragment including a small base64ed image, a traced placeholder SVG, or one without.
             ...GatsbyContentfulResolutions_withWebp
+            aspectRatio
+          }
+          file {
+            details {
+              image {
+                width
+              }
+            }
           }
         }
       }
