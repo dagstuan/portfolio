@@ -29,14 +29,20 @@
     &:hover {
       .moon {
         fill: #DAA520;
+        stroke: #DAA520;
       }
       
       .sun {
         fill: #FFD700;
+        stroke: #FFD700;
+      }
+
+      .sun__center {
+        stroke: #FFD700;
       }
     }
 
-    .sun, .moon {
+    .sun, .sun__center, .moon {
       fill: transparent;
       stroke-width: 10px;
       transition: opacity 0.5s, fill 0.25s, stroke 0.25s;
@@ -46,6 +52,13 @@
     .sun {
       stroke: @color--white;
       opacity: 0;
+
+      &__center {
+        opacity: 0;
+        stroke-width: 10;
+        stroke: @color--white;
+        fill: @color--black;
+      }
     }
     
     .moon {
