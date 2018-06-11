@@ -135,7 +135,7 @@ export const query = graphql`
       images {
         title
         image {
-          resolutions(width: 1600, quality: 90) {
+          resolutions(width: 1200, quality: 90) {
             ...GatsbyContentfulResolutions_withWebp
             aspectRatio
           }
