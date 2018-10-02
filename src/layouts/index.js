@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { StaticQuery, graphql } from 'gatsby';
 import PropTypes from 'prop-types';
 import Helmet from 'react-helmet';
 import classNames from 'classnames';
@@ -9,6 +10,19 @@ import Lightbulb from '../components/lightbulb';
 import '../stylesheets/styles.less';
 
 const windowGlobal = typeof window !== 'undefined' && window;
+
+const query = graphql`
+  query CategoriesQuery {
+    allContentfulCategory {
+      edges {
+        node {
+          title
+          slug
+        }
+      }
+    }
+  }
+`;
 
 class Layout extends Component {
   constructor() {
@@ -50,10 +64,7 @@ class Layout extends Component {
   render() {
     const { menuOpen, dark } = this.state;
 
-    const {
-      children,
-      data: { allContentfulCategory },
-    } = this.props;
+    const { children } = this.props;
 
     const wrapperClass = classNames('wrapper', {
       'dark-mode': dark,
@@ -64,48 +75,44 @@ class Layout extends Component {
     });
 
     return (
-      <main className={wrapperClass}>
-        <div className={menuOverlayClass} onClick={this.closeMenu} />
-        <Helmet
-          title="Dag Stuan"
-          meta={[{ name: 'description', content: 'Portfolio' }]}
-        >
-          <link
-            href="https://fonts.googleapis.com/css?family=Cinzel:400,700|Lato"
-            rel="stylesheet"
-          />
-        </Helmet>
+      <StaticQuery
+        query={query}
+        render={data => {
+          const { allContentfulCategory } = data;
 
-        <Menu
-          categories={allContentfulCategory.edges}
-          menuOpen={menuOpen}
-          toggleMenu={this.toggleMenu}
-          closeMenu={this.closeMenu}
-        />
+          return (
+            <main className={wrapperClass}>
+              <div className={menuOverlayClass} onClick={this.closeMenu} />
+              <Helmet
+                title="Dag Stuan"
+                meta={[{ name: 'description', content: 'Portfolio' }]}
+              >
+                <link
+                  href="https://fonts.googleapis.com/css?family=Cinzel:400,700|Lato"
+                  rel="stylesheet"
+                />
+              </Helmet>
 
-        {children()}
+              <Menu
+                categories={allContentfulCategory.edges}
+                menuOpen={menuOpen}
+                toggleMenu={this.toggleMenu}
+                closeMenu={this.closeMenu}
+              />
 
-        <Lightbulb on={!dark} toggleOn={this.toggleDark} />
-      </main>
+              {children}
+
+              <Lightbulb on={!dark} toggleOn={this.toggleDark} />
+            </main>
+          );
+        }}
+      />
     );
   }
 }
 
-export const query = graphql`
-  query CategoriesQuery {
-    allContentfulCategory {
-      edges {
-        node {
-          title
-          slug
-        }
-      }
-    }
-  }
-`;
-
 Layout.propTypes = {
-  children: PropTypes.func,
+  children: PropTypes.any,
 };
 
 export default Layout;

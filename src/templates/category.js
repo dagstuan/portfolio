@@ -1,11 +1,6 @@
 import React from 'react';
+import { graphql } from 'gatsby';
 import Img from 'gatsby-image';
-
-const width = '85%';
-const height = '80vh';
-
-const paddingTopBottomPx = 22;
-const paddingLeftRightPx = 35;
 
 class CategoryElem extends React.Component {
   constructor() {
@@ -35,10 +30,10 @@ class CategoryElem extends React.Component {
     const { image } = this.props;
 
     const imageWidth = Math.min(
-      image.image.resolutions.width,
+      image.image.fixed.width,
       image.image.file.details.image.width
     );
-    const imageHeight = imageWidth / image.image.resolutions.aspectRatio;
+    const imageHeight = imageWidth / image.image.fixed.aspectRatio;
 
     return imageWidth / imageHeight;
   };
@@ -93,9 +88,9 @@ class CategoryElem extends React.Component {
             }}
           >
             <Img
-              resolutions={image.image.resolutions}
+              fixed={image.image.fixed}
               alt={image.title}
-              outerWrapperClassName="category-elem__image"
+              className="category-elem__image"
               style={{ width: '100%', height: '100%' }}
             />
           </div>
@@ -111,7 +106,7 @@ const Category = ({ data }) => {
   } = data;
 
   return (
-    <div>
+    <>
       <div className="title__wrapper">
         <h1 className="title">{title}</h1>
       </div>
@@ -123,7 +118,7 @@ const Category = ({ data }) => {
           ))}
         </ul>
       )}
-    </div>
+    </>
   );
 };
 
@@ -135,8 +130,8 @@ export const query = graphql`
       images {
         title
         image {
-          resolutions(width: 1200, quality: 90) {
-            ...GatsbyContentfulResolutions_withWebp
+          fixed(width: 1200, quality: 90) {
+            ...GatsbyContentfulFixed_withWebp
             aspectRatio
           }
           file {
