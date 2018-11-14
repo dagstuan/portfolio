@@ -113,12 +113,12 @@ const Category = ({ data }) => {
       <Helmet>
         <title>{title} - Dag Stuan</title>
         {titleMetaTags(`${title} - Dag Stuan portfolio`)}
-        {images.slice(0, 4).map((image, index) => {
+        {images.slice(0, 4).map(image => {
           const {
             image: { resize },
           } = image;
 
-          return imageMetaTags(resize, index);
+          return imageMetaTags(resize);
         })}
       </Helmet>
       <div className="title__wrapper">
