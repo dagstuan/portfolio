@@ -116,8 +116,6 @@ class Layout extends Component {
                 <meta name="keywords" content={metaKeywords.join(', ')} />
                 <meta property="og:type" content="profile" />
                 <meta property="og:locale" content="en_US" />
-                <meta property="og:first_name" content="Dag" />
-                <meta property="og:last_name" content="Stuan" />
                 {titleMetaTags('Dag Stuan')}
                 {descriptionMetaTags(metaDescription)}
                 <meta property="twitter:card" content="summary_large_image" />
