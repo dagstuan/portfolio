@@ -26,5 +26,12 @@ module.exports = {
       },
     },
     'gatsby-transformer-remark',
+    `gatsby-plugin-force-trailing-slashes`,
+    {
+      resolve: `gatsby-plugin-canonical-urls`,
+      options: {
+        siteUrl: `https://dagstuan.com/`,
+      },
+    },
   ],
 };
