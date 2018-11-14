@@ -111,6 +111,7 @@ class Layout extends Component {
           return (
             <>
               <Helmet>
+                <html lang="en" />
                 <title>Dag Stuan</title>
                 <meta name="keywords" content={metaKeywords.join(', ')} />
                 <meta property="og:type" content="profile" />
