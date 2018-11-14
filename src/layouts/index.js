@@ -1,8 +1,11 @@
+/* eslint-disable no-restricted-globals */
+
 import React, { Component } from 'react';
 import { StaticQuery, graphql } from 'gatsby';
 import PropTypes from 'prop-types';
 import Helmet from 'react-helmet';
 import classNames from 'classnames';
+import { Location } from '@reach/router';
 
 import Menu from '../components/menu';
 import Lightbulb from '../components/lightbulb';
@@ -109,35 +112,43 @@ class Layout extends Component {
           const { allContentfulCategory } = data;
 
           return (
-            <main className={wrapperClass}>
-              <div className={menuOverlayClass} onClick={this.closeMenu} />
-              <Helmet>
-                <title>Dag Stuan</title>
-                <meta name="keywords" content={metaKeywords.join(', ')} />
-                <meta property="og:url" content={window.location} />
-                <meta property="og:type" content="profile" />
-                <meta property="og:locale" content="en_US" />
-                <meta property="og:first_name" content="Dag" />
-                <meta property="og:last_name" content="Stuan" />
-                {titleMetaTags('Dag Stuan')}
-                {descriptionMetaTags(metaDescription)}
-                <link
-                  href="https://fonts.googleapis.com/css?family=Cinzel:400,700%7CLato"
-                  rel="stylesheet"
+            <>
+              <Location>
+                {({ _, location }) => {
+                  return (
+                    <Helmet>
+                      <title>Dag Stuan</title>
+                      <meta name="keywords" content={metaKeywords.join(', ')} />
+                      <meta property="og:url" content={location.href} />
+                      <meta property="og:type" content="profile" />
+                      <meta property="og:locale" content="en_US" />
+                      <meta property="og:first_name" content="Dag" />
+                      <meta property="og:last_name" content="Stuan" />
+                      {titleMetaTags('Dag Stuan')}
+                      {descriptionMetaTags(metaDescription)}
+                      <link
+                        href="https://fonts.googleapis.com/css?family=Cinzel:400,700%7CLato"
+                        rel="stylesheet"
+                      />
+                    </Helmet>
+                  );
+                }}
+              </Location>
+              <main className={wrapperClass}>
+                <div className={menuOverlayClass} onClick={this.closeMenu} />
+
+                <Menu
+                  categories={allContentfulCategory.edges}
+                  menuOpen={menuOpen}
+                  toggleMenu={this.toggleMenu}
+                  closeMenu={this.closeMenu}
                 />
-              </Helmet>
 
-              <Menu
-                categories={allContentfulCategory.edges}
-                menuOpen={menuOpen}
-                toggleMenu={this.toggleMenu}
-                closeMenu={this.closeMenu}
-              />
+                {children}
 
-              {children}
-
-              <Lightbulb on={!dark} toggleOn={this.toggleDark} />
-            </main>
+                <Lightbulb on={!dark} toggleOn={this.toggleDark} />
+              </main>
+            </>
           );
         }}
       />
