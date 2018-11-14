@@ -2,7 +2,12 @@ module.exports = {
   plugins: [
     `gatsby-plugin-layout`,
     'gatsby-plugin-react-helmet',
-    'gatsby-plugin-less',
+    {
+      resolve: 'gatsby-plugin-typography',
+      options: {
+        pathToConfigModule: `src/utils/typography.js`,
+      },
+    },
     {
       resolve: 'gatsby-plugin-nprogress',
       options: {

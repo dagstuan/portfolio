@@ -7,8 +7,6 @@ import classNames from 'classnames';
 import Menu from '../components/menu';
 import Lightbulb from '../components/lightbulb';
 
-import '../stylesheets/styles.less';
-
 const windowGlobal = typeof window !== 'undefined' && window;
 
 const query = graphql`
