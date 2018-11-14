@@ -108,18 +108,19 @@ const Category = ({ data }) => {
     contentfulCategory: { title, images },
   } = data;
 
+  const firstImage = images[0];
+
+  const {
+    title: imageTitle,
+    image: { resize },
+  } = firstImage;
+
   return (
     <>
       <Helmet>
         <title>{title} - Dag Stuan</title>
         {titleMetaTags(`${title} - Dag Stuan portfolio`)}
-        {images.slice(0, 4).map(image => {
-          const {
-            image: { resize },
-          } = image;
-
-          return imageMetaTags(resize);
-        })}
+        {imageMetaTags(resize, imageTitle)}
       </Helmet>
       <div className="title__wrapper">
         <h1 className="title">{title}</h1>

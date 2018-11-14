@@ -43,7 +43,7 @@ const AboutPage = () => {
           <>
             <Helmet>
               {titleMetaTags('About Dag Stuan')}
-              {imageMetaTags(resize)}
+              {imageMetaTags(resize, 'Dag Stuan')}
             </Helmet>
             <div className="about__wrapper">
               <div className="about">

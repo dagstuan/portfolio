@@ -12,6 +12,7 @@ const query = graphql`
     contentfulHome {
       title
       cover {
+        title
         image {
           resize(width: 1200) {
             src
@@ -34,13 +35,14 @@ const IndexPage = () => {
       render={data => {
         const {
           cover: {
+            title,
             image: { resize, fluid },
           },
         } = data.contentfulHome;
 
         return (
           <>
-            <Helmet>{imageMetaTags(resize)}</Helmet>
+            <Helmet>{imageMetaTags(resize, title)}</Helmet>
             <div className="home">
               <Img
                 fluid={fluid}
