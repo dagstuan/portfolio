@@ -23,7 +23,7 @@ export const onRouteUpdate = ({ location }) => {
   if (twitterSiteContent && twitterBaseProtocol && twitterBaseHost) {
     twitterSiteDomElement.setAttribute(
       `content`,
-      `${baseProtocol}//${twitterBaseHost}${location.pathname}${
+      `${twitterBaseProtocol}//${twitterBaseHost}${location.pathname}${
         location.search
       }${location.hash}`
     );
