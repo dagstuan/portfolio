@@ -1,4 +1,7 @@
 module.exports = {
+  siteMetadata: {
+    siteUrl: `https://dagstuan.com`,
+  },
   plugins: [
     `gatsby-plugin-layout`,
     'gatsby-plugin-react-helmet',
@@ -34,5 +37,6 @@ module.exports = {
         siteUrl: `https://dagstuan.com`,
       },
     },
+    'gatsby-plugin-sitemap',
   ],
 };
