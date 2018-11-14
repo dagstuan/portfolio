@@ -3,6 +3,8 @@ import { graphql } from 'gatsby';
 import Img from 'gatsby-image';
 import Helmet from 'react-helmet';
 
+import { imageMetaTags, titleMetaTags } from '../utils/metaUtils';
+
 class CategoryElem extends React.Component {
   constructor() {
     super();
@@ -101,19 +103,6 @@ class CategoryElem extends React.Component {
   }
 }
 
-const imageMetaTags = ({ src, width, height }, imageNum = 0) => {
-  return [
-    <meta key="og:image" property="og:image" content={src} />,
-    <meta key="og:image:width" property="og:image:width" content={width} />,
-    <meta key="og:image:height" property="og:image:height" content={height} />,
-    <meta
-      key={`twitter:image${imageNum}:src`}
-      property={`twitter:image${imageNum}:src`}
-      content={src}
-    />,
-  ];
-};
-
 const Category = ({ data }) => {
   const {
     contentfulCategory: { title, images },
@@ -123,8 +112,8 @@ const Category = ({ data }) => {
     <>
       <Helmet>
         <title>{title} - Dag Stuan</title>
+        {titleMetaTags(`${title} - Dag Stuan portfolio`)}
         {images.slice(0, 4).map((image, index) => {
-          console.log(image);
           const {
             image: { resize },
           } = image;

@@ -5,6 +5,8 @@ import Helmet from 'react-helmet';
 
 import logo from '../assets/logo.svg';
 
+import { imageMetaTags } from '../utils/metaUtils';
+
 const query = graphql`
   query {
     contentfulHome {
@@ -38,13 +40,7 @@ const IndexPage = () => {
 
         return (
           <>
-            <Helmet>
-              <meta property="og:image" content={resize.src} />
-              <meta property="og:image:width" content={resize.width} />
-              <meta property="og:image:height" content={resize.height} />
-
-              <meta property="twitter:image0:src" content={resize.src} />
-            </Helmet>
+            <Helmet>{imageMetaTags(resize)}</Helmet>
             <div className="home">
               <Img
                 fluid={fluid}

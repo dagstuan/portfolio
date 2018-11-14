@@ -9,6 +9,8 @@ import Lightbulb from '../components/lightbulb';
 
 import '../stylesheets/styles.less';
 
+import { descriptionMetaTags, titleMetaTags } from '../utils/metaUtils';
+
 const metaKeywords = [
   'photographers',
   'photography',
@@ -112,17 +114,14 @@ class Layout extends Component {
               <Helmet>
                 <title>Dag Stuan</title>
                 <meta content={metaKeywords.join(', ')} name="keywords" />
-                <meta name="description" value={metaDescription} />
 
-                <meta property="og:title" value="Dag Stuan portfolio" />
                 <meta property="og:type" value="profile" />
                 <meta property="og:locale" content="en_US" />
                 <meta property="og:first_name" value="Dag" />
                 <meta property="og:last_name" value="Stuan" />
-                <meta property="og:description" value={metaDescription} />
 
-                <meta property="twitter:title" value="Dag Stuan portfolio" />
-                <meta property="twitter:description" value={metaDescription} />
+                {titleMetaTags('Dag Stuan portfolio')}
+                {descriptionMetaTags(metaDescription)}
 
                 <link
                   href="https://fonts.googleapis.com/css?family=Cinzel:400,700%7CLato"
