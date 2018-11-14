@@ -30,7 +30,7 @@ module.exports = {
     {
       resolve: `gatsby-plugin-canonical-urls`,
       options: {
-        siteUrl: `https://dagstuan.com/`,
+        siteUrl: `https://dagstuan.com`,
       },
     },
   ],
