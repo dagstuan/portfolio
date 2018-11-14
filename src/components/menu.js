@@ -20,12 +20,12 @@ const Menu = ({ categories, menuOpen, toggleMenu, closeMenu }) => {
     <header>
       <button className={toggleClass} onClick={toggleMenu}>
         <span className="menu-toggle__label">Menu</span>
-        <div className="menu-toggle__icon">
+        <span className="menu-toggle__icon">
           <span className="menu-toggle__icon-line" />
           <span className="menu-toggle__icon-line" />
           <span className="menu-toggle__icon-line" />
           <span className="menu-toggle__icon-line" />
-        </div>
+        </span>
       </button>
       <nav className={menuClass}>
         <ul className="menu__elems">
