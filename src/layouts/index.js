@@ -9,6 +9,32 @@ import Lightbulb from '../components/lightbulb';
 
 import '../stylesheets/styles.less';
 
+const metaKeywords = [
+  'photographers',
+  'photography',
+  'photo',
+  'photos',
+  'inspiring photography',
+  'photo sharing',
+  'photo download',
+  'wall art',
+  'commercial photography',
+  'pulse',
+  'affection',
+  'flow',
+  'following',
+  'activity',
+  'fresh',
+  'upcoming',
+  'editors',
+  'photo portfolio',
+  'portfolio',
+  'norway',
+];
+
+const metaDescription =
+  'Portfolio of Dag Stuan, Photographer, Rock Climber, Skier. Currently residing in Trondheim, Norway';
+
 const windowGlobal = typeof window !== 'undefined' && window;
 
 const query = graphql`
@@ -83,12 +109,23 @@ class Layout extends Component {
           return (
             <main className={wrapperClass}>
               <div className={menuOverlayClass} onClick={this.closeMenu} />
-              <Helmet
-                title="Dag Stuan"
-                meta={[{ name: 'description', content: 'Portfolio' }]}
-              >
+              <Helmet>
+                <title>Dag Stuan</title>
+                <meta content={metaKeywords.join(', ')} name="keywords" />
+                <meta name="description" value={metaDescription} />
+
+                <meta property="og:title" value="Dag Stuan portfolio" />
+                <meta property="og:type" value="profile" />
+                <meta property="og:locale" content="en_US" />
+                <meta property="og:first_name" value="Dag" />
+                <meta property="og:last_name" value="Stuan" />
+                <meta property="og:description" value={metaDescription} />
+
+                <meta property="twitter:title" value="Dag Stuan portfolio" />
+                <meta property="twitter:description" value={metaDescription} />
+
                 <link
-                  href="https://fonts.googleapis.com/css?family=Cinzel:400,700|Lato"
+                  href="https://fonts.googleapis.com/css?family=Cinzel:400,700%7CLato"
                   rel="stylesheet"
                 />
               </Helmet>

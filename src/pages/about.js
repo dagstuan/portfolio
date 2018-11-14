@@ -32,19 +32,17 @@ const AboutPage = () => {
         } = data.contentfulAbout;
 
         return (
-          <>
-            <div className="about__wrapper">
-              <div className="about">
-                <div
-                  className="about__text"
-                  dangerouslySetInnerHTML={{ __html: html }}
-                />
-                <div className="about__image">
-                  <Img fluid={image.fluid} />
-                </div>
+          <div className="about__wrapper">
+            <div className="about">
+              <div
+                className="about__text"
+                dangerouslySetInnerHTML={{ __html: html }}
+              />
+              <div className="about__image">
+                <Img fluid={image.fluid} />
               </div>
             </div>
-          </>
+          </div>
         );
       }}
     />

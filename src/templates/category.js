@@ -1,6 +1,7 @@
 import React from 'react';
 import { graphql } from 'gatsby';
 import Img from 'gatsby-image';
+import Helmet from 'react-helmet';
 
 class CategoryElem extends React.Component {
   constructor() {
@@ -100,6 +101,19 @@ class CategoryElem extends React.Component {
   }
 }
 
+const imageMetaTags = ({ src, width, height }, imageNum = 0) => {
+  return [
+    <meta key="og:image" property="og:image" content={src} />,
+    <meta key="og:image:width" property="og:image:width" content={width} />,
+    <meta key="og:image:height" property="og:image:height" content={height} />,
+    <meta
+      key={`twitter:image${imageNum}:src`}
+      property={`twitter:image${imageNum}:src`}
+      content={src}
+    />,
+  ];
+};
+
 const Category = ({ data }) => {
   const {
     contentfulCategory: { title, images },
@@ -107,6 +121,17 @@ const Category = ({ data }) => {
 
   return (
     <>
+      <Helmet>
+        <title>{title} - Dag Stuan</title>
+        {images.slice(0, 4).map((image, index) => {
+          console.log(image);
+          const {
+            image: { resize },
+          } = image;
+
+          return imageMetaTags(resize, index);
+        })}
+      </Helmet>
       <div className="title__wrapper">
         <h1 className="title">{title}</h1>
       </div>
@@ -130,6 +155,11 @@ export const query = graphql`
       images {
         title
         image {
+          resize(width: 1200) {
+            src
+            width
+            height
+          }
           fixed(width: 1200, quality: 90) {
             ...GatsbyContentfulFixed_withWebp
             aspectRatio
