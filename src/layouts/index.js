@@ -113,12 +113,12 @@ class Layout extends Component {
               <div className={menuOverlayClass} onClick={this.closeMenu} />
               <Helmet>
                 <title>Dag Stuan</title>
-                <meta content={metaKeywords.join(', ')} name="keywords" />
+                <meta name="keywords" content={metaKeywords.join(', ')} />
 
-                <meta property="og:type" value="profile" />
+                <meta property="og:type" content="profile" />
                 <meta property="og:locale" content="en_US" />
-                <meta property="og:first_name" value="Dag" />
-                <meta property="og:last_name" value="Stuan" />
+                <meta property="og:first_name" content="Dag" />
+                <meta property="og:last_name" content="Stuan" />
 
                 {titleMetaTags('Dag Stuan portfolio')}
                 {descriptionMetaTags(metaDescription)}

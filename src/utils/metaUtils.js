@@ -2,19 +2,19 @@ import React from 'react';
 
 export const titleMetaTags = title => {
   return [
-    <meta key="og:title" property="og:title" value={title} />,
-    <meta key="twitter:title" property="twitter:title" value={title} />,
+    <meta key="og:title" property="og:title" content={title} />,
+    <meta key="twitter:title" property="twitter:title" content={title} />,
   ];
 };
 
 export const descriptionMetaTags = description => [
-  <meta key="description" name="description" value={description} />,
+  <meta key="description" name="description" content={description} />,
   <meta
     key="twitter:description"
     property="twitter:description"
-    value={description}
+    content={description}
   />,
-  <meta key="og:description" property="og:description" value={description} />,
+  <meta key="og:description" property="og:description" content={description} />,
 ];
 
 export const imageMetaTags = ({ src, width, height }, imageNum = 0) => [
