@@ -119,6 +119,7 @@ class Layout extends Component {
                 <meta property="og:last_name" content="Stuan" />
                 {titleMetaTags('Dag Stuan')}
                 {descriptionMetaTags(metaDescription)}
+                <meta property="twitter:card" content="summary_large_image" />
                 <link
                   href="https://fonts.googleapis.com/css?family=Cinzel:400,700%7CLato"
                   rel="stylesheet"
