@@ -22,7 +22,7 @@ module.exports = {
       resolve: `gatsby-plugin-gtag`,
       options: {
         trackingId: `UA-35576492-1`,
-        head: false,
+        head: true,
         anonymize: true,
       },
     },
