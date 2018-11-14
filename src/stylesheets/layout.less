@@ -1,9 +1,12 @@
-html, body {
+html,
+body {
   margin: 0;
   background-color: @color--white;
 }
 
-h1, h2, h3 { 
+h1,
+h2,
+h3 {
   font-weight: normal;
   font-family: @font-family-headers;
 }
@@ -37,9 +40,13 @@ li {
   }
 }
 
-h1, h2, h3, p, li {
-  transition: color .5s;
-  transition-timing-function: cubic-bezier(.84,0,.22,1);
+h1,
+h2,
+h3,
+p,
+li {
+  transition: color 0.5s;
+  transition-timing-function: cubic-bezier(0.84, 0, 0.22, 1);
 }
 
 a {
@@ -70,23 +77,23 @@ p {
   opacity: 0;
   visibility: hidden;
   z-index: 99;
-  transform: translate3d(0,0,0);
+  transform: translate3d(0, 0, 0);
 
-  transition: visibility .5s linear 0s, opacity .5s;
-  transition-timing-function: cubic-bezier(.84,0,.22,1);
+  transition: visibility 0.5s linear 0s, opacity 0.5s;
+  transition-timing-function: cubic-bezier(0.84, 0, 0.22, 1);
 
   &--menu-open {
     visibility: visible;
-    opacity: .5;
+    opacity: 0.5;
 
-    transition: visibility .5s linear 0s, opacity .5s;
-    transition-timing-function: cubic-bezier(.84,0,.22,1);
+    transition: visibility 0.5s linear 0s, opacity 0.5s;
+    transition-timing-function: cubic-bezier(0.84, 0, 0.22, 1);
   }
 }
 
 .wrapper {
-  transition: background-color .5s linear 0s, opacity .5s;
-  transition-timing-function: cubic-bezier(.84,0,.22,1);
+  transition: background-color 0.5s linear 0s, opacity 0.5s;
+  transition-timing-function: cubic-bezier(0.84, 0, 0.22, 1);
 }
 
 .dark-mode {
@@ -112,7 +119,12 @@ p {
 }
 
 .dark-mode {
-  h1, h2, h3, p, li, a {
+  h1,
+  h2,
+  h3,
+  p,
+  li,
+  a {
     color: @color--white;
   }
 

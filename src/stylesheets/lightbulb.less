@@ -28,25 +28,27 @@
 
     &:hover {
       .moon {
-        fill: #DAA520;
-        stroke: #DAA520;
+        fill: #daa520;
+        stroke: #daa520;
       }
-      
+
       .sun {
-        fill: #FFD700;
-        stroke: #FFD700;
+        fill: #ffd700;
+        stroke: #ffd700;
       }
 
       .sun__center {
-        stroke: #FFD700;
+        stroke: #ffd700;
       }
     }
 
-    .sun, .sun__center, .moon {
+    .sun,
+    .sun__center,
+    .moon {
       fill: transparent;
       stroke-width: 10px;
       transition: opacity 0.5s, fill 0.25s, stroke 0.25s;
-      transition-timing-function: cubic-bezier(.84,0,.22,1);
+      transition-timing-function: cubic-bezier(0.84, 0, 0.22, 1);
     }
 
     .sun {
@@ -60,7 +62,7 @@
         fill: @color--black;
       }
     }
-    
+
     .moon {
       stroke: @color--black;
       opacity: 0;
@@ -71,4 +73,3 @@
     }
   }
 }
-
