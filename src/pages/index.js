@@ -10,7 +10,6 @@ import { imageMetaTags } from '../utils/metaUtils';
 const query = graphql`
   query {
     contentfulHome {
-      title
       cover {
         title
         image {
@@ -45,6 +44,7 @@ const IndexPage = () => {
             <Helmet>{imageMetaTags(resize, title)}</Helmet>
             <div className="home">
               <Img
+                alt={title}
                 fluid={fluid}
                 style={{
                   width: '100%',
