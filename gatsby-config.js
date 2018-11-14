@@ -26,11 +26,5 @@ module.exports = {
       },
     },
     'gatsby-transformer-remark',
-    {
-      resolve: `gatsby-plugin-canonical-urls`,
-      options: {
-        siteUrl: `https://dagstuan.com`,
-      },
-    },
   ],
 };
