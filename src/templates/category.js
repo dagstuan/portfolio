@@ -119,7 +119,7 @@ const Category = ({ data }) => {
     <>
       <Helmet>
         <title>{title} - Dag Stuan</title>
-        {titleMetaTags(`${title} - Dag Stuan portfolio`)}
+        {titleMetaTags(`${title} - Dag Stuan`)}
         {imageMetaTags(resize, imageTitle)}
       </Helmet>
       <div className="title__wrapper">

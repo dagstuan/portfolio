@@ -35,7 +35,7 @@ const metaKeywords = [
 ];
 
 const metaDescription =
-  'Portfolio of Dag Stuan. Photographer, Rock Climber, Skier. Currently residing in Trondheim, Norway';
+  'Photographer, Rock Climber, Skier residing in Trondheim, Norway';
 
 const windowGlobal = typeof window !== 'undefined' && window;
 
