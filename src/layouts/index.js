@@ -1,11 +1,8 @@
-/* eslint-disable no-restricted-globals */
-
 import React, { Component } from 'react';
 import { StaticQuery, graphql } from 'gatsby';
 import PropTypes from 'prop-types';
 import Helmet from 'react-helmet';
 import classNames from 'classnames';
-import { Location } from '@reach/router';
 
 import Menu from '../components/menu';
 import Lightbulb from '../components/lightbulb';
@@ -113,27 +110,20 @@ class Layout extends Component {
 
           return (
             <>
-              <Location>
-                {({ _, location }) => {
-                  return (
-                    <Helmet>
-                      <title>Dag Stuan</title>
-                      <meta name="keywords" content={metaKeywords.join(', ')} />
-                      <meta property="og:url" content={location.href} />
-                      <meta property="og:type" content="profile" />
-                      <meta property="og:locale" content="en_US" />
-                      <meta property="og:first_name" content="Dag" />
-                      <meta property="og:last_name" content="Stuan" />
-                      {titleMetaTags('Dag Stuan')}
-                      {descriptionMetaTags(metaDescription)}
-                      <link
-                        href="https://fonts.googleapis.com/css?family=Cinzel:400,700%7CLato"
-                        rel="stylesheet"
-                      />
-                    </Helmet>
-                  );
-                }}
-              </Location>
+              <Helmet>
+                <title>Dag Stuan</title>
+                <meta name="keywords" content={metaKeywords.join(', ')} />
+                <meta property="og:type" content="profile" />
+                <meta property="og:locale" content="en_US" />
+                <meta property="og:first_name" content="Dag" />
+                <meta property="og:last_name" content="Stuan" />
+                {titleMetaTags('Dag Stuan')}
+                {descriptionMetaTags(metaDescription)}
+                <link
+                  href="https://fonts.googleapis.com/css?family=Cinzel:400,700%7CLato"
+                  rel="stylesheet"
+                />
+              </Helmet>
               <main className={wrapperClass}>
                 <div className={menuOverlayClass} onClick={this.closeMenu} />
 
