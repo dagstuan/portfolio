@@ -10,7 +10,7 @@ export const onRenderBody = ({ setHeadComponents, pathname = `/` }) => {
     <meta
       property="og:url"
       key={myUrl}
-      value={myUrl}
+      content={myUrl}
       data-baseprotocol={parsedUrl.protocol}
       data-basehost={parsedUrl.host}
     />,
