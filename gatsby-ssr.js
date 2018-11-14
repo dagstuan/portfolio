@@ -9,7 +9,14 @@ export const onRenderBody = ({ setHeadComponents, pathname = `/` }) => {
   setHeadComponents([
     <meta
       property="og:url"
-      key={myUrl}
+      key={`og:url:${myUrl}`}
+      content={myUrl}
+      data-baseprotocol={parsedUrl.protocol}
+      data-basehost={parsedUrl.host}
+    />,
+    <meta
+      property="twitter:site"
+      key={`twitter:site:${myUrl}`}
       content={myUrl}
       data-baseprotocol={parsedUrl.protocol}
       data-basehost={parsedUrl.host}

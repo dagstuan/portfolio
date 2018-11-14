@@ -1,14 +1,31 @@
 export const onRouteUpdate = ({ location }) => {
-  const domElem = document.querySelector(`meta[property='og:url']`);
-  var existingContent = domElem.getAttribute(`content`);
-  var baseProtocol = domElem.getAttribute(`data-baseProtocol`);
-  var baseHost = domElem.getAttribute(`data-baseHost`);
-  if (existingContent && baseProtocol && baseHost) {
-    domElem.setAttribute(
+  const ogUrlDomElem = document.querySelector(`meta[property='og:url']`);
+  var ogUrlContent = ogUrlDomElem.getAttribute(`content`);
+  var ogUrlBaseProtocol = ogUrlDomElem.getAttribute(`data-baseProtocol`);
+  var ogUrlBaseHost = ogUrlDomElem.getAttribute(`data-baseHost`);
+  if (ogUrlContent && ogUrlBaseProtocol && ogUrlBaseHost) {
+    ogUrlDomElem.setAttribute(
       `content`,
-      `${baseProtocol}//${baseHost}${location.pathname}${location.search}${
-        location.hash
-      }`
+      `${ogUrlBaseProtocol}//${ogUrlBaseHost}${location.pathname}${
+        location.search
+      }${location.hash}`
+    );
+  }
+
+  const twitterSiteDomElement = document.querySelector(
+    `meta[property='twitter:site']`
+  );
+  var twitterSiteContent = twitterSiteDomElement.getAttribute(`content`);
+  var twitterBaseProtocol = twitterSiteDomElement.getAttribute(
+    `data-baseProtocol`
+  );
+  var twitterBaseHost = twitterSiteDomElement.getAttribute(`data-baseHost`);
+  if (twitterSiteContent && twitterBaseProtocol && twitterBaseHost) {
+    twitterSiteDomElement.setAttribute(
+      `content`,
+      `${baseProtocol}//${twitterBaseHost}${location.pathname}${
+        location.search
+      }${location.hash}`
     );
   }
 };
