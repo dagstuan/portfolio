@@ -35,7 +35,7 @@ const metaKeywords = [
 ];
 
 const metaDescription =
-  'Portfolio of Dag Stuan, Photographer, Rock Climber, Skier. Currently residing in Trondheim, Norway';
+  'Portfolio of Dag Stuan. Photographer, Rock Climber, Skier. Currently residing in Trondheim, Norway';
 
 const windowGlobal = typeof window !== 'undefined' && window;
 
@@ -120,7 +120,7 @@ class Layout extends Component {
                 <meta property="og:first_name" content="Dag" />
                 <meta property="og:last_name" content="Stuan" />
 
-                {titleMetaTags('Dag Stuan portfolio')}
+                {titleMetaTags('Dag Stuan')}
                 {descriptionMetaTags(metaDescription)}
 
                 <link
