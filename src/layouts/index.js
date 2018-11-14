@@ -114,15 +114,13 @@ class Layout extends Component {
               <Helmet>
                 <title>Dag Stuan</title>
                 <meta name="keywords" content={metaKeywords.join(', ')} />
-
+                <meta property="og:url" content={window.location} />
                 <meta property="og:type" content="profile" />
                 <meta property="og:locale" content="en_US" />
                 <meta property="og:first_name" content="Dag" />
                 <meta property="og:last_name" content="Stuan" />
-
                 {titleMetaTags('Dag Stuan')}
                 {descriptionMetaTags(metaDescription)}
-
                 <link
                   href="https://fonts.googleapis.com/css?family=Cinzel:400,700%7CLato"
                   rel="stylesheet"
