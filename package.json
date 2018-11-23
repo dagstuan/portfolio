@@ -5,7 +5,7 @@
   "author": "Dag Stuan <d.stuan@gmail.com>",
   "dependencies": {
     "classnames": "^2.2.6",
-    "gatsby": "^2.0.49",
+    "gatsby": "^2.0.55",
     "gatsby-image": "^2.0.20",
     "gatsby-plugin-canonical-urls": "^2.0.7",
     "gatsby-plugin-gtag": "^1.0.4",
@@ -14,7 +14,7 @@
     "gatsby-plugin-nprogress": "^2.0.6",
     "gatsby-plugin-react-helmet": "^3.0.2",
     "gatsby-plugin-sitemap": "^2.0.2",
-    "gatsby-source-contentful": "^2.0.14",
+    "gatsby-source-contentful": "^2.0.15",
     "gatsby-transformer-remark": "^2.1.12",
     "less": "^3.8.1",
     "react": "^16.6.3",
