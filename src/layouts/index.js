@@ -39,6 +39,15 @@ const metaDescription =
 
 const windowGlobal = typeof window !== 'undefined' && window;
 
+let initialDarkState = false;
+
+if (
+  windowGlobal.localStorage &&
+  windowGlobal.localStorage.getItem('dark') === 'true'
+) {
+  initialDarkState = true;
+}
+
 const query = graphql`
   query CategoriesQuery {
     allContentfulCategory {
@@ -55,21 +64,13 @@ const query = graphql`
 class Layout extends Component {
   constructor() {
     super();
-
-    let initialDarkState = false;
-
-    if (
-      windowGlobal.localStorage &&
-      windowGlobal.localStorage.getItem('dark') === 'true'
-    ) {
-      initialDarkState = true;
-    }
-
     this.state = {
       menuOpen: false,
       dark: initialDarkState,
     };
   }
+
+  componentWillMount() {}
 
   toggleMenu = () => {
     this.setState({ menuOpen: !this.state.menuOpen });
