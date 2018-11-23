@@ -70,7 +70,11 @@ class Layout extends Component {
     };
   }
 
-  componentWillMount() {}
+  componentDidMount() {
+    this.setState({
+      dark: initialDarkState,
+    });
+  }
 
   toggleMenu = () => {
     this.setState({ menuOpen: !this.state.menuOpen });
@@ -102,8 +106,6 @@ class Layout extends Component {
     const menuOverlayClass = classNames('menu-open-overlay', {
       'menu-open-overlay--menu-open': menuOpen,
     });
-
-    console.log(wrapperClass);
 
     return (
       <StaticQuery
