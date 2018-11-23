@@ -60,7 +60,7 @@ class Layout extends Component {
 
     if (
       windowGlobal.localStorage &&
-      windowGlobal.localStorage.getItem('dark') === 'true'
+      windowGlobal.localStorage.getItem('dark') == true
     ) {
       initialDarkState = true;
     }
