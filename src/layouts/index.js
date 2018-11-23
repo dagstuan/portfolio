@@ -66,7 +66,7 @@ class Layout extends Component {
     super();
     this.state = {
       menuOpen: false,
-      dark: initialDarkState,
+      dark: false,
     };
   }
 
