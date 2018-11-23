@@ -103,6 +103,8 @@ class Layout extends Component {
       'menu-open-overlay--menu-open': menuOpen,
     });
 
+    console.log(wrapperClass);
+
     return (
       <StaticQuery
         query={query}
