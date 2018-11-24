@@ -3,6 +3,7 @@ import { graphql } from 'gatsby';
 import Helmet from 'react-helmet';
 
 import { imageMetaTags, titleMetaTags } from '../utils/metaUtils';
+import { listenToIntersections } from '../utils/intersectionObserverUtils';
 
 import CategoryImage from './categoryImage';
 
@@ -10,10 +11,51 @@ class Category extends Component {
   constructor(props) {
     super(props);
 
+    this.elemRefs = {};
+    this.prevNextRefs = {};
+
     this.state = {
       loadedImages: [],
     };
   }
+
+  componentDidMount() {
+    document.addEventListener('keydown', this.handleKeyDown, false);
+  }
+
+  componentWillUnmount() {
+    document.removeEventListener('keydown', this.handleKeyDown, false);
+  }
+
+  handleKeyDown = event => {
+    var refs = this.prevNextRefs[this.visibleId];
+    if (!refs) {
+      return;
+    }
+
+    if (
+      event.keyCode === 32 /* spacebar */ ||
+      event.keyCode === 75 /* k */ ||
+      event.keyCode === 40 /* arrow down */ ||
+      event.keyCode === 39 /* arrow right */
+    ) {
+      event.preventDefault();
+      if (refs.nextRef) {
+        refs.nextRef.scrollIntoView({ behavior: 'smooth' });
+        this.visibleId = refs.nextId;
+      }
+    } else if (
+      event.keyCode === 74 /* j */ ||
+      event.keyCode === 37 /* arrow left */ ||
+      event.keyCode === 38 /* arrow up */
+    ) {
+      event.preventDefault();
+      if (refs.prevRef) {
+        refs.prevRef.scrollIntoView({ behavior: 'smooth' });
+        this.visibleId = refs.prevId;
+      }
+    }
+  };
 
   onImageLoad = id => {
     const { loadedImages } = this.state;
@@ -27,6 +69,50 @@ class Category extends Component {
     });
   };
 
+  handleImageRef = (id, ref) => {
+    this.elemRefs[id] = ref;
+
+    listenToIntersections(ref, () => {
+      if (this.visibleRef !== ref) {
+        this.visibleId = id;
+      }
+    });
+  };
+
+  componentDidUpdate() {
+    const {
+      data: {
+        contentfulCategory: { images },
+      },
+    } = this.props;
+
+    this.prevNextRefs = images.reduce((acc, curr, index) => {
+      const { id } = curr;
+
+      let nextId, nextRef, prevId, prevRef;
+
+      if (index < images.length - 1) {
+        nextId = images[index + 1].id;
+        nextRef = this.elemRefs[nextId];
+      }
+
+      if (index > 0) {
+        prevId = images[index - 1].id;
+        prevRef = this.elemRefs[prevId];
+      }
+
+      return {
+        ...acc,
+        [id]: {
+          prevId,
+          prevRef,
+          nextId,
+          nextRef,
+        },
+      };
+    }, {});
+  }
+
   render() {
     const {
       data: {
@@ -36,19 +122,12 @@ class Category extends Component {
 
     const { loadedImages } = this.state;
 
-    const firstImage = images[0];
-
-    const {
-      title: imageTitle,
-      image: { resize },
-    } = firstImage;
-
     return (
       <>
         <Helmet>
           <title>{title} - Dag Stuan</title>
           {titleMetaTags(`${title} - Dag Stuan`)}
-          {imageMetaTags(resize, imageTitle)}
+          {imageMetaTags(images[0].image.resize, images[0].title)}
         </Helmet>
         <div className="title__wrapper">
           <h1 className="title">{title}</h1>
@@ -57,15 +136,18 @@ class Category extends Component {
         {images && (
           <ul className="category-elems">
             {images.map(image => {
+              const { id } = image;
+
               const anyLoaded = loadedImages.length > 0;
-              const isLoaded = loadedImages.includes(image.id);
+              const isLoaded = loadedImages.includes(id);
 
               return (
                 <CategoryImage
-                  key={image.id}
+                  wrapperRef={ref => this.handleImageRef(id, ref)}
+                  key={id}
                   image={image}
                   critical={anyLoaded && !isLoaded}
-                  onImageLoad={() => this.onImageLoad(image.id)}
+                  onImageLoad={() => this.onImageLoad(id)}
                 />
               );
             })}

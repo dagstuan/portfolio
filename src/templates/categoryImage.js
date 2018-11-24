@@ -69,12 +69,12 @@ export default class CategoryImage extends PureComponent {
   };
 
   render() {
-    const { image, critical, onImageLoad } = this.props;
+    const { image, critical, onImageLoad, wrapperRef } = this.props;
 
     const { imageWidth, imageHeight } = this.state;
 
     return (
-      <li className="category-elem">
+      <li ref={wrapperRef} className="category-elem">
         <div
           className="category-elem__image-outer-wrapper"
           ref={this.setContainerRef}
