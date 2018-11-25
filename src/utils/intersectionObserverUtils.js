@@ -35,21 +35,25 @@ function getIO() {
 }
 
 export function listenToIntersections(domElement, callback) {
-  if (domElement) {
+  var intersectionObserver = getIO();
+
+  if (domElement && intersectionObserver) {
     const existingIndex = listeners.findIndex(l => l[0] === domElement);
 
     if (existingIndex >= 0) {
       listeners = listeners.filter(l => l[0] !== domElement);
     }
 
-    getIO().observe(domElement);
+    intersectionObserver.observe(domElement);
     listeners.push([domElement, callback]);
   }
 }
 
 export function removeIntersectionListener(domElement) {
-  if (domElement) {
-    getIO().unobserve(domElement);
+  var intersectionObserver = getIO();
+
+  if (domElement && intersectionObserver) {
+    intersectionObserver.unobserve(domElement);
     listeners = listeners.filter(l => l[0] !== domElement);
   }
 }
