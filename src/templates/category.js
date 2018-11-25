@@ -3,7 +3,10 @@ import { graphql } from 'gatsby';
 import Helmet from 'react-helmet';
 
 import { imageMetaTags, titleMetaTags } from '../utils/metaUtils';
-import { listenToIntersections } from '../utils/intersectionObserverUtils';
+import {
+  listenToIntersections,
+  removeIntersectionListener,
+} from '../utils/intersectionObserverUtils';
 
 import CategoryImage from './categoryImage';
 
@@ -11,7 +14,7 @@ class Category extends Component {
   constructor(props) {
     super(props);
 
-    this.elemRefs = {};
+    this.elemRefs = [];
     this.prevNextRefs = {};
 
     this.state = {
@@ -21,14 +24,34 @@ class Category extends Component {
 
   componentDidMount() {
     document.addEventListener('keydown', this.handleKeyDown, false);
+    this.setPrevNextRefs();
   }
 
   componentWillUnmount() {
     document.removeEventListener('keydown', this.handleKeyDown, false);
+
+    this.elemRefs.forEach(({ ref }) => {
+      removeIntersectionListener(ref);
+    });
   }
 
+  findRefForId = id => {
+    const existing = this.elemRefs.find(elem => elem.id === id);
+
+    if (existing) {
+      return existing.ref;
+    }
+    return null;
+  };
+
   handleKeyDown = event => {
-    var refs = this.prevNextRefs[this.visibleId];
+    const elem = this.elemRefs.find(e => e.ref === this.visibleRef);
+
+    if (!elem) {
+      return;
+    }
+
+    var refs = this.prevNextRefs[elem.id];
     if (!refs) {
       return;
     }
@@ -40,9 +63,9 @@ class Category extends Component {
       event.keyCode === 39 /* arrow right */
     ) {
       event.preventDefault();
-      if (refs.nextRef) {
-        refs.nextRef.scrollIntoView({ behavior: 'smooth' });
-        this.visibleId = refs.nextId;
+      if (refs.next) {
+        refs.next.scrollIntoView({ behavior: 'smooth' });
+        this.visibleRef = refs.next;
       }
     } else if (
       event.keyCode === 74 /* j */ ||
@@ -50,9 +73,9 @@ class Category extends Component {
       event.keyCode === 38 /* arrow up */
     ) {
       event.preventDefault();
-      if (refs.prevRef) {
-        refs.prevRef.scrollIntoView({ behavior: 'smooth' });
-        this.visibleId = refs.prevId;
+      if (refs.prev) {
+        refs.prev.scrollIntoView({ behavior: 'smooth' });
+        this.visibleRef = refs.prev;
       }
     }
   };
@@ -69,17 +92,37 @@ class Category extends Component {
     });
   };
 
-  handleImageRef = (id, ref) => {
-    this.elemRefs[id] = ref;
-
-    listenToIntersections(ref, () => {
-      if (this.visibleRef !== ref) {
-        this.visibleId = id;
-      }
-    });
+  handleIntersection = ref => {
+    if (this.visibleRef !== ref) {
+      this.visibleRef = ref;
+    }
   };
 
-  componentDidUpdate() {
+  handleImageRef = (id, ref) => {
+    if (!ref) {
+      return;
+    }
+
+    const existingIndex = this.elemRefs.findIndex(r => r.ref === ref);
+
+    if (existingIndex >= 0) {
+      const existing = this.elemRefs[existingIndex];
+
+      if (existing.id === id) {
+        return;
+      }
+
+      this.elemRefs.splice(existingIndex, 1);
+    }
+
+    this.elemRefs.push({
+      id,
+      ref,
+    });
+    listenToIntersections(ref, this.handleIntersection);
+  };
+
+  setPrevNextRefs = () => {
     const {
       data: {
         contentfulCategory: { images },
@@ -89,28 +132,48 @@ class Category extends Component {
     this.prevNextRefs = images.reduce((acc, curr, index) => {
       const { id } = curr;
 
-      let nextId, nextRef, prevId, prevRef;
+      let next, prev;
 
       if (index < images.length - 1) {
-        nextId = images[index + 1].id;
-        nextRef = this.elemRefs[nextId];
+        const nextId = images[index + 1].id;
+        next = this.findRefForId(nextId);
       }
 
       if (index > 0) {
-        prevId = images[index - 1].id;
-        prevRef = this.elemRefs[prevId];
+        const prevId = images[index - 1].id;
+        prev = this.findRefForId(prevId);
       }
 
       return {
         ...acc,
         [id]: {
-          prevId,
-          prevRef,
-          nextId,
-          nextRef,
+          prev,
+          next,
         },
       };
     }, {});
+  };
+
+  componentDidUpdate(prevProps) {
+    const {
+      data: {
+        contentfulCategory: { images },
+      },
+    } = this.props;
+
+    if (prevProps) {
+      const {
+        data: {
+          contentfulCategory: { images: prevImages },
+        },
+      } = prevProps;
+
+      if (prevImages === images) {
+        return;
+      }
+    }
+
+    this.setPrevNextRefs();
   }
 
   render() {

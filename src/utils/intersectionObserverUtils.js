@@ -1,7 +1,7 @@
 const windowGlobal = typeof window !== 'undefined' && window;
 
 let io;
-const listeners = [];
+let listeners = [];
 
 const intersectionThreshold = 0.9;
 
@@ -21,7 +21,7 @@ function getIO() {
                 entry.isIntersecting ||
                 entry.intersectionRatio > intersectionThreshold
               ) {
-                l[1]();
+                l[1](l[0]);
               }
             }
           });
@@ -36,7 +36,20 @@ function getIO() {
 
 export function listenToIntersections(domElement, callback) {
   if (domElement) {
+    const existingIndex = listeners.findIndex(l => l[0] === domElement);
+
+    if (existingIndex >= 0) {
+      listeners = listeners.filter(l => l[0] !== domElement);
+    }
+
     getIO().observe(domElement);
     listeners.push([domElement, callback]);
+  }
+}
+
+export function removeIntersectionListener(domElement) {
+  if (domElement) {
+    getIO().unobserve(domElement);
+    listeners = listeners.filter(l => l[0] !== domElement);
   }
 }
