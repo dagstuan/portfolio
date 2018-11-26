@@ -57,7 +57,7 @@ class Category extends Component {
     }
 
     if (
-      event.keyCode === 32 /* spacebar */ ||
+      (!event.shiftKey && event.keyCode === 32) /* spacebar */ ||
       event.keyCode === 74 /* j */ ||
       event.keyCode === 40 /* arrow down */ ||
       event.keyCode === 39 /* arrow right */
