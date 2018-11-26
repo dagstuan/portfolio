@@ -58,7 +58,7 @@ class Category extends Component {
 
     if (
       event.keyCode === 32 /* spacebar */ ||
-      event.keyCode === 75 /* k */ ||
+      event.keyCode === 74 /* j */ ||
       event.keyCode === 40 /* arrow down */ ||
       event.keyCode === 39 /* arrow right */
     ) {
@@ -68,7 +68,7 @@ class Category extends Component {
         this.visibleRef = refs.next;
       }
     } else if (
-      event.keyCode === 74 /* j */ ||
+      event.keyCode === 75 /* k */ ||
       event.keyCode === 37 /* arrow left */ ||
       event.keyCode === 38 /* arrow up */
     ) {
