@@ -57,10 +57,10 @@ class Category extends Component {
     }
 
     if (
-      (!event.shiftKey && event.keyCode === 32) /* spacebar */ ||
-      event.keyCode === 74 /* j */ ||
-      event.keyCode === 40 /* arrow down */ ||
-      event.keyCode === 39 /* arrow right */
+      (!event.shiftKey && event.key === ' ') /* spacebar */ ||
+      event.key === 'j' ||
+      event.key === 'ArrowDown' ||
+      event.key === 'ArrowRight'
     ) {
       event.preventDefault();
       if (refs.next) {
@@ -68,10 +68,10 @@ class Category extends Component {
         this.visibleRef = refs.next;
       }
     } else if (
-      (event.shiftKey && event.keyCode === 32) ||
-      event.keyCode === 75 /* k */ ||
-      event.keyCode === 37 /* arrow left */ ||
-      event.keyCode === 38 /* arrow up */
+      (event.shiftKey && event.key === ' ') ||
+      event.key === 'k' ||
+      event.key === 'ArrowLeft' ||
+      event.key === 'ArrowUp'
     ) {
       event.preventDefault();
       if (refs.prev) {
