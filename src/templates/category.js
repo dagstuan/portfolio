@@ -236,7 +236,7 @@ export const query = graphql`
             width
             height
           }
-          fixed(width: 1200, quality: 90) {
+          fixed(width: 3000, quality: 90) {
             ...GatsbyContentfulFixed_withWebp
             aspectRatio
           }
