@@ -236,8 +236,8 @@ export const query = graphql`
             width
             height
           }
-          fixed(width: 1300, quality: 90) {
-            ...GatsbyContentfulFixed_withWebp
+          fluid(maxWidth: 2500, quality: 75) {
+            ...GatsbyContentfulFluid_withWebp
             aspectRatio
           }
           file {

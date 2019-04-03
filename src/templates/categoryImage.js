@@ -28,11 +28,9 @@ export default class CategoryImage extends PureComponent {
   getImageAspectRatio = () => {
     const { image } = this.props;
 
-    const imageWidth = Math.min(
-      image.image.fixed.width,
-      image.image.file.details.image.width
-    );
-    const imageHeight = imageWidth / image.image.fixed.aspectRatio;
+    const imageWidth = image.image.file.details.image.width;
+
+    const imageHeight = imageWidth / image.image.fluid.aspectRatio;
 
     return imageWidth / imageHeight;
   };
@@ -89,7 +87,7 @@ export default class CategoryImage extends PureComponent {
             <Img
               key={critical}
               onLoad={onImageLoad}
-              fixed={image.image.fixed}
+              fluid={image.image.fluid}
               alt={image.title}
               className="category-elem__image"
               style={{ width: '100%', height: '100%' }}
