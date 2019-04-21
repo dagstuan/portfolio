@@ -42,9 +42,9 @@
       top: 0;
       left: 0;
       opacity: 0;
-      -webkit-box-shadow: 0px 0px 5px 1px @color--gray;
-      -moz-box-shadow: 0px 0px 5px 1px @color--gray;
-      box-shadow: 0px 0px 5px 1px @color--gray;
+      -webkit-box-shadow: 0px 0px 1px 1px @color--gray-dark;
+      -moz-box-shadow: 0px 0px 1px 1px @color--gray-dark;
+      box-shadow: 0px 0px 1px 1px @color--gray-dark;
       transition: opacity 0.5s;
       transition-timing-function: cubic-bezier(0.84, 0, 0.22, 1);
     }
@@ -66,8 +66,20 @@
   }
 
   @media only screen and (max-width: 750px) {
+    padding-bottom: 3rem;
+    height: auto;
+
+    &:first-child {
+      padding-top: 7rem;
+    }
+
+    &:last-child {
+      padding-bottom: 7rem;
+    }
+
     &__image-outer-wrapper {
       width: 100%;
+      height: auto;
     }
   }
 }

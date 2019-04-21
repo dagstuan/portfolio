@@ -36,6 +36,15 @@ export default class CategoryImage extends PureComponent {
   };
 
   updateDimensions = () => {
+    const windowWidth = window.innerWidth;
+    if (windowWidth <= 750) {
+      this.setState({
+        imageWidth: '100%',
+        imageHeight: '100%',
+      });
+      return;
+    }
+
     const { containerWidth, containerHeight } = this.state;
 
     const newContainerWidth = this.containerRef.offsetWidth;
