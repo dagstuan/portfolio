@@ -87,7 +87,6 @@ const CategoryPage: FunctionComponent<ICategoryPageProps> = ({
   useEffect(() => {
     let nextRef: RefObject<HTMLElement>;
 
-    console.log(prevKeyPressed);
     if (prevKeyPressed && visibleImageIndex > 0) {
       nextRef = imageRefs.current[visibleImageIndex - 1];
     } else if (nextKeyPressed && visibleImageIndex < images.length) {

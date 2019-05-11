@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { useState, useCallback } from 'react';
+import { FC, useState, useCallback } from 'react';
 import { useStaticQuery, graphql } from 'gatsby';
 import { Helmet } from 'react-helmet';
 import classNames from 'classnames';
@@ -51,7 +51,7 @@ const query = graphql`
   }
 `;
 
-const Layout: React.FunctionComponent = ({ children }) => {
+const Layout: FC = ({ children }) => {
   const [menuOpen, setMenuOpen] = useState(false);
   const [dark, setDark] = useLocalStorage('dark', false);
   const { allContentfulCategory } = useStaticQuery(query);
@@ -75,6 +75,8 @@ const Layout: React.FunctionComponent = ({ children }) => {
   const menuOverlayClass = classNames('menu-open-overlay', {
     'menu-open-overlay--menu-open': menuOpen,
   });
+
+  console.log(dark);
 
   return (
     <>
