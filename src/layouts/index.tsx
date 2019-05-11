@@ -74,7 +74,6 @@ const Layout: FC = ({ children }) => {
 
   const menuOverlayClass = classNames('menu-open-overlay', {
     'menu-open-overlay--menu-open': menuOpen,
-    foooo: dark,
   });
 
   return (
