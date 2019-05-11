@@ -29,12 +29,17 @@ export default function useKeyPress(...targetKeys: IKey[]) {
   };
 
   useEffect(() => {
-    window.addEventListener('keydown', downHandler);
-    window.addEventListener('keyup', upHandler);
+    if (typeof window !== 'undefined') {
+      window.addEventListener('keydown', downHandler);
+      window.addEventListener('keyup', upHandler);
+    }
+
     // Remove event listeners on cleanup
     return () => {
-      window.removeEventListener('keydown', downHandler);
-      window.removeEventListener('keyup', upHandler);
+      if (typeof window !== 'undefined') {
+        window.removeEventListener('keydown', downHandler);
+        window.removeEventListener('keyup', upHandler);
+      }
     };
   }, []);
 

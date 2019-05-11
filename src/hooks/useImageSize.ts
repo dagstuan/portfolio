@@ -20,7 +20,7 @@ export default function useImageSize(
   const [containerHeight, setContainerHeight] = useState(0);
 
   const updateDimensions = () => {
-    const windowWidth = window.innerWidth;
+    const windowWidth = typeof window !== `undefined` ? window.innerWidth : 0;
     if (windowWidth <= 750) {
       setImageWidth('100%');
       setImageHeight('100%');

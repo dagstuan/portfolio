@@ -9,7 +9,10 @@ export default function useLocalStorage<T extends any = string>(
   const [storedValue, setStoredValue] = useState<T>(() => {
     try {
       // Get from local storage by key
-      const item = window.localStorage.getItem(key);
+      const item =
+        typeof window !== `undefined`
+          ? window.localStorage.getItem(key)
+          : undefined;
       // Parse stored json or if none return initialValue
       return item ? JSON.parse(item) : initialValue;
     } catch (error) {

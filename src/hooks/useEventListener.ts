@@ -3,8 +3,12 @@ import { useRef, useEffect } from 'react';
 export default function useEventListener(
   eventName: string,
   handler: Function,
-  element: HTMLElement | Window = window
+  element?: HTMLElement | Window
 ) {
+  if (!element && typeof window !== 'undefined') {
+    element = window;
+  }
+
   // Create a ref that stores handler
   const savedHandler = useRef<Function>();
 
