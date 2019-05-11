@@ -1,13 +1,13 @@
-import React from 'react';
+import * as React from 'react';
 
-export const titleMetaTags = title => {
+export const titleMetaTags = (title: string) => {
   return [
     <meta key="og:title" property="og:title" content={title} />,
     <meta key="twitter:title" property="twitter:title" content={title} />,
   ];
 };
 
-export const descriptionMetaTags = description => [
+export const descriptionMetaTags = (description: string) => [
   <meta key="description" name="description" content={description} />,
   <meta
     key="twitter:description"
@@ -17,7 +17,10 @@ export const descriptionMetaTags = description => [
   <meta key="og:description" property="og:description" content={description} />,
 ];
 
-export const imageMetaTags = ({ src, width, height }, title) => {
+export const imageMetaTags = (
+  { src, width, height }: { src: string; width: string; height: string },
+  title: string
+) => {
   const fixedSrc = `https:${src}`;
 
   return [

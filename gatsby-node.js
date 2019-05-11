@@ -23,7 +23,7 @@ exports.createPages = ({ graphql, actions }) => {
       result.data.allContentfulCategory.edges.map(({ node }) => {
         createPage({
           path: node.slug,
-          component: path.resolve(`./src/templates/category.js`),
+          component: path.resolve(`./src/templates/Category.tsx`),
           context: {
             slug: node.slug,
           },
