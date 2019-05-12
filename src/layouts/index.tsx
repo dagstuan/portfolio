@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { FC, useState, useCallback } from 'react';
+import { FC, useState, useCallback, useLayoutEffect } from 'react';
 import { useStaticQuery, graphql } from 'gatsby';
 import { Helmet } from 'react-helmet';
 import classNames from 'classnames';
@@ -53,7 +53,11 @@ const query = graphql`
 
 const Layout: FC = ({ children }) => {
   const [menuOpen, setMenuOpen] = useState(false);
-  const [dark, setDark] = useLocalStorage('dark', false);
+  const [dark, setDark] = useState(false);
+  const [localStorageDark, setLocalStorageDark] = useLocalStorage(
+    'dark',
+    false
+  );
   const { allContentfulCategory } = useStaticQuery(query);
 
   const toggleMenu = useCallback(() => {
@@ -65,8 +69,14 @@ const Layout: FC = ({ children }) => {
   }, []);
 
   const toggleDark = useCallback(() => {
-    setDark(!dark);
+    const nextDark = !dark;
+    setDark(nextDark);
+    setLocalStorageDark(nextDark);
   }, [dark]);
+
+  useLayoutEffect(() => {
+    setDark(localStorageDark);
+  }, []);
 
   const wrapperClass = classNames('wrapper', {
     'dark-mode': dark,
