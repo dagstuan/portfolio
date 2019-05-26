@@ -98,10 +98,6 @@ const Layout: FC = ({ children }) => {
         {descriptionMetaTags(metaDescription)}
         <meta property="twitter:card" content="summary_large_image" />
         <meta property="twitter:creator" content="@dagstuan" />
-        <link
-          href="https://fonts.googleapis.com/css?family=Cinzel:400,700%7CLato"
-          rel="stylesheet"
-        />
       </Helmet>
       <main className={wrapperClass}>
         <div className={menuOverlayClass} onClick={closeMenu} />

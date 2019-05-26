@@ -39,5 +39,13 @@ module.exports = {
     },
     'gatsby-plugin-sitemap',
     'gatsby-plugin-typescript',
+    {
+      resolve: 'gatsby-plugin-web-font-loader',
+      options: {
+        google: {
+          families: ['Cinzel:400,700', 'Lato'],
+        },
+      },
+    },
   ],
 };
