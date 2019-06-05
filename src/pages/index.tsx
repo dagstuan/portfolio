@@ -2,10 +2,37 @@ import * as React from 'react';
 import { useStaticQuery, graphql } from 'gatsby';
 import Img from 'gatsby-image';
 import { Helmet } from 'react-helmet';
+import { imageMetaTags } from '../utils/metaUtils';
+import { makeThemedStyles } from '../styles/helpers';
 
 import logo from '../assets/logo.svg';
 
-import { imageMetaTags } from '../utils/metaUtils';
+const useStyles = makeThemedStyles(theme => ({
+  wrapper: {
+    position: 'relative',
+    height: '100vh',
+  },
+  logoWrapper: {
+    position: 'absolute',
+    height: theme.space.top,
+    top: 0,
+    left: theme.space.leftRight,
+    marginTop: '-3px',
+    width: '170px',
+    display: 'flex',
+    alignItems: 'center',
+  },
+  logo: {
+    width: '170px',
+  },
+  image: {
+    width: '100%',
+    margin: '12vh auto',
+    position: 'absolute',
+    top: 0,
+    bottom: 0,
+  },
+}));
 
 const query = graphql`
   query {
@@ -43,6 +70,8 @@ const query = graphql`
 const IndexPage: React.FunctionComponent = () => {
   const data = useStaticQuery(query);
 
+  const classes = useStyles();
+
   const {
     cover: {
       title,
@@ -53,21 +82,18 @@ const IndexPage: React.FunctionComponent = () => {
   return (
     <>
       <Helmet>{imageMetaTags(resize, title)}</Helmet>
-      <div className="home">
+      <div className={classes.wrapper}>
         <Img
           alt={title}
           fluid={fluid}
+          className={classes.image}
           style={{
-            width: '100%',
-            margin: '12vh auto',
             position: 'absolute',
-            top: 0,
-            bottom: 0,
           }}
         />
-        <div className="title__wrapper">
+        <div className={classes.logoWrapper}>
           <img
-            className="title home__logo-image"
+            className={classes.logo}
             src={logo}
             alt="Dag Stuan Photography"
           />

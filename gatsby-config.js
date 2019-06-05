@@ -7,6 +7,9 @@ module.exports = {
     'gatsby-plugin-react-helmet',
     'gatsby-plugin-less',
     {
+      resolve: 'gatsby-plugin-material-ui',
+    },
+    {
       resolve: 'gatsby-plugin-nprogress',
       options: {
         color: '#3e3e3e',
