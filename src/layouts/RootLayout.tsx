@@ -138,6 +138,10 @@ const RootLayout: FC = ({ children }) => {
         {descriptionMetaTags(metaDescription)}
         <meta property="twitter:card" content="summary_large_image" />
         <meta property="twitter:creator" content="@dagstuan" />
+        <link
+          rel="icon"
+          href="https://emojipedia-us.s3.dualstack.us-west-1.amazonaws.com/thumbs/240/apple/232/camera_1f4f7.png"
+        />
       </Helmet>
       <main className={wrapperClass}>
         <div className={menuOverlayClass} onClick={closeMenu} />
