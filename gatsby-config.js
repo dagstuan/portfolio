@@ -4,7 +4,7 @@ module.exports = {
   },
   plugins: [
     `gatsby-plugin-layout`,
-    'gatsby-plugin-react-helmet',
+    'gatsby-plugin-react-helmet-async',
     'gatsby-plugin-less',
     {
       resolve: 'gatsby-plugin-nprogress',

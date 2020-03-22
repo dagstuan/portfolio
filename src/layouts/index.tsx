@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { FC, useState, useCallback, useLayoutEffect } from 'react';
 import { useStaticQuery, graphql } from 'gatsby';
-import { Helmet } from 'react-helmet';
+import { Helmet, HelmetProvider } from 'react-helmet-async';
 import classNames from 'classnames';
 
 import Menu from '../components/menu';
@@ -87,7 +87,7 @@ const Layout: FC = ({ children }) => {
   });
 
   return (
-    <>
+    <HelmetProvider>
       <Helmet>
         <html lang="en" />
         <title>Dag Stuan</title>
@@ -117,7 +117,7 @@ const Layout: FC = ({ children }) => {
 
         <Lightbulb on={!dark} toggleOn={toggleDark} />
       </main>
-    </>
+    </HelmetProvider>
   );
 };
 

@@ -4,25 +4,25 @@
   "version": "1.0.0",
   "author": "Dag Stuan <d.stuan@gmail.com>",
   "dependencies": {
-    "@types/react-helmet": "^5.0.8",
+    "@types/react-helmet": "^5.0.15",
     "classnames": "^2.2.6",
-    "gatsby": "^2.7.1",
-    "gatsby-image": "^2.1.1",
-    "gatsby-plugin-canonical-urls": "^2.0.13",
-    "gatsby-plugin-gtag": "^1.0.11",
-    "gatsby-plugin-layout": "^1.0.15",
-    "gatsby-plugin-less": "^2.0.13",
-    "gatsby-plugin-nprogress": "^2.0.10",
-    "gatsby-plugin-react-helmet": "^3.0.12",
-    "gatsby-plugin-sitemap": "^2.1.0",
-    "gatsby-plugin-typescript": "^2.0.15",
+    "gatsby": "^2.20.2",
+    "gatsby-image": "^2.3.0",
+    "gatsby-plugin-canonical-urls": "^2.2.0",
+    "gatsby-plugin-gtag": "^1.0.13",
+    "gatsby-plugin-layout": "^1.2.0",
+    "gatsby-plugin-less": "^3.1.0",
+    "gatsby-plugin-nprogress": "^2.2.0",
+    "gatsby-plugin-react-helmet-async": "^1.0.16",
+    "gatsby-plugin-sitemap": "^2.3.0",
+    "gatsby-plugin-typescript": "^2.3.0",
     "gatsby-plugin-web-font-loader": "^1.0.4",
-    "gatsby-source-contentful": "^2.0.63",
-    "gatsby-transformer-remark": "^2.3.12",
-    "less": "^3.9.0",
-    "react": "^16.8.6",
-    "react-dom": "^16.8.6",
-    "react-helmet": "^6.0.0-beta",
+    "gatsby-source-contentful": "^2.2.2",
+    "gatsby-transformer-remark": "^2.7.0",
+    "less": "^3.11.1",
+    "react": "^16.13.1",
+    "react-dom": "^16.13.1",
+    "react-helmet-async": "^1.0.4",
     "react-svg-morph": "^0.2.1"
   },
   "keywords": [
@@ -38,6 +38,6 @@
   },
   "devDependencies": {
     "gatsby-plugin-force-trailing-slashes": "^1.0.4",
-    "prettier": "^1.17.1"
+    "prettier": "^2.0.1"
   }
 }

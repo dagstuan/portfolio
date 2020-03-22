@@ -9,7 +9,7 @@ import React, {
   memo,
 } from 'react';
 import { graphql } from 'gatsby';
-import { Helmet } from 'react-helmet';
+import { Helmet } from 'react-helmet-async';
 
 import { imageMetaTags, titleMetaTags } from '../utils/metaUtils';
 
@@ -59,7 +59,7 @@ const CategoryPage: FunctionComponent<ICategoryPageProps> = ({
     contentfulCategory: { title, images },
   },
 }) => {
-  const imageRefs = useRef([...images.map(_ => createRef<HTMLElement>())]);
+  const imageRefs = useRef([...images.map((_) => createRef<HTMLElement>())]);
   const [anyLoadedImages, setAnyLoadedImages] = useState(false);
   const [visibleImageIndex, setVisibleImageIndex] = useState<number>(0);
 

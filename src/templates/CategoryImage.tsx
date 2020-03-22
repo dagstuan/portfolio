@@ -69,7 +69,7 @@ const CategoryImage: FC<ICategoryImageProps> = props => {
             alt={image.title}
             className="category-elem__image"
             style={{ width: '100%', height: '100%' }}
-            critical={shouldBeCritical}
+            loading={shouldBeCritical ? 'eager' : 'lazy'}
           />
         </div>
       </div>

@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { StaticQuery, graphql } from 'gatsby';
 import Img from 'gatsby-image';
-import { Helmet } from 'react-helmet';
+import { Helmet } from 'react-helmet-async';
 
 import { titleMetaTags, imageMetaTags } from '../utils/metaUtils';
 
@@ -31,7 +31,7 @@ const AboutPage: React.FunctionComponent = () => {
   return (
     <StaticQuery
       query={query}
-      render={data => {
+      render={(data) => {
         const {
           content: {
             childMarkdownRemark: { html },
