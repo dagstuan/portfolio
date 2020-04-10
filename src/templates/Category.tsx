@@ -1,4 +1,5 @@
-import React, {
+import * as React from 'react';
+import {
   useState,
   FunctionComponent,
   useCallback,
@@ -10,6 +11,9 @@ import React, {
 } from 'react';
 import { graphql } from 'gatsby';
 import { Helmet } from 'react-helmet-async';
+
+import * as classes from './category.module.less';
+import * as layoutClasses from '../layouts/layout.module.less';
 
 import { imageMetaTags, titleMetaTags } from '../utils/metaUtils';
 
@@ -85,7 +89,9 @@ const CategoryPage: FunctionComponent<ICategoryPageProps> = ({
   );
 
   useEffect(() => {
-    let nextRef: RefObject<HTMLElement>;
+    let nextRef: RefObject<HTMLElement> = {
+      current: null,
+    };
 
     if (prevKeyPressed && visibleImageIndex > 0) {
       nextRef = imageRefs.current[visibleImageIndex - 1];
@@ -93,7 +99,7 @@ const CategoryPage: FunctionComponent<ICategoryPageProps> = ({
       nextRef = imageRefs.current[visibleImageIndex + 1];
     }
 
-    if (nextRef) {
+    if (nextRef && nextRef.current) {
       nextRef.current.scrollIntoView({ behavior: 'smooth' });
     }
   }, [imageRefs, prevKeyPressed, nextKeyPressed]);
@@ -105,12 +111,12 @@ const CategoryPage: FunctionComponent<ICategoryPageProps> = ({
         {titleMetaTags(`${title} - Dag Stuan`)}
         {imageMetaTags(images[0].image.resize, images[0].title)}
       </Helmet>
-      <div className="title__wrapper">
-        <h1 className="title">{title}</h1>
+      <div className={layoutClasses.title__wrapper}>
+        <h1 className={layoutClasses.title}>{title}</h1>
       </div>
 
       {images && (
-        <ul className="category-elems">
+        <ul className={classes.categoryElems}>
           {images.map((image, index) => {
             const { id } = image;
 

@@ -1,4 +1,5 @@
-import React, {
+import * as React from 'react';
+import {
   FC,
   useRef,
   RefObject,
@@ -13,6 +14,8 @@ import { Image } from '../types/Image';
 import useOnScreen from '../hooks/useOnScreen';
 import usePrevious from '../hooks/usePrevious';
 
+import * as classes from './category.module.less';
+
 interface ICategoryImageProps {
   imageRef: RefObject<any>;
   image: Image;
@@ -22,7 +25,7 @@ interface ICategoryImageProps {
   onImageVisible: (index: number) => void;
 }
 
-const CategoryImage: FC<ICategoryImageProps> = props => {
+const CategoryImage: FC<ICategoryImageProps> = (props) => {
   const {
     imageRef,
     image,
@@ -53,10 +56,13 @@ const CategoryImage: FC<ICategoryImageProps> = props => {
   const shouldBeCritical = (!isLoaded && critical) || previousCritical === true;
 
   return (
-    <li ref={imageRef} className="category-elem">
-      <div className="category-elem__image-outer-wrapper" ref={containerRef}>
+    <li ref={imageRef} className={classes.categoryElem}>
+      <div
+        className={classes.categoryElem__imageOuterWrapper}
+        ref={containerRef}
+      >
         <div
-          className="category-elem__image-wrapper"
+          className={classes.categoryElem__imageWrapper}
           style={{
             width: imageWidth,
             height: imageHeight,
@@ -67,7 +73,6 @@ const CategoryImage: FC<ICategoryImageProps> = props => {
             onLoad={onImageLoadCallback}
             fluid={image.image.fluid}
             alt={image.title}
-            className="category-elem__image"
             style={{ width: '100%', height: '100%' }}
             loading={shouldBeCritical ? 'eager' : 'lazy'}
           />

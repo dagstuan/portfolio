@@ -6,9 +6,7 @@ export const onRouteUpdate = ({ location }) => {
   if (ogUrlContent && ogUrlBaseProtocol && ogUrlBaseHost) {
     ogUrlDomElem.setAttribute(
       `content`,
-      `${ogUrlBaseProtocol}//${ogUrlBaseHost}${location.pathname}${
-        location.search
-      }${location.hash}`
+      `${ogUrlBaseProtocol}//${ogUrlBaseHost}${location.pathname}${location.search}${location.hash}`
     );
   }
 
@@ -23,9 +21,7 @@ export const onRouteUpdate = ({ location }) => {
   if (twitterSiteContent && twitterBaseProtocol && twitterBaseHost) {
     twitterSiteDomElement.setAttribute(
       `content`,
-      `${twitterBaseProtocol}//${twitterBaseHost}${location.pathname}${
-        location.search
-      }${location.hash}`
+      `${twitterBaseProtocol}//${twitterBaseHost}${location.pathname}${location.search}${location.hash}`
     );
   }
 };

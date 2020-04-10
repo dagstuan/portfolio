@@ -47,5 +47,6 @@ module.exports = {
         },
       },
     },
+    'gatsby-plugin-less-modules-typings',
   ],
 };

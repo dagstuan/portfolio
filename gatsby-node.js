@@ -19,7 +19,7 @@ exports.createPages = ({ graphql, actions }) => {
           }
         }
       }
-    `).then(result => {
+    `).then((result) => {
       result.data.allContentfulCategory.edges.map(({ node }) => {
         createPage({
           path: node.slug,

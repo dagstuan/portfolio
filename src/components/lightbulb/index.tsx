@@ -1,24 +1,31 @@
-import React from 'react';
+import * as React from 'react';
 import classNames from 'classnames';
 
-export default function Lightbulb({ on, toggleOn }) {
-  const sunClass = classNames('sun', {
-    visible: !on,
+import * as classes from './lightbulb.module.less';
+
+type LightbulbProps = {
+  on: boolean;
+  toggleOn: () => void;
+};
+
+export default function Lightbulb({ on, toggleOn }: LightbulbProps) {
+  const sunClass = classNames(classes.sun, {
+    [classes.visible]: !on,
   });
 
-  const sunCenterClass = classNames('sun__center', {
-    visible: !on,
+  const sunCenterClass = classNames(classes.sun__center, {
+    [classes.visible]: !on,
   });
 
-  const moonClass = classNames('moon', {
-    visible: on,
+  const moonClass = classNames(classes.moon, {
+    [classes.visible]: on,
   });
 
   return (
-    <div className="lightbulb__wrapper">
-      <button className="lightbulb__button" onClick={toggleOn}>
+    <div className={classes.lightbulb__wrapper}>
+      <button className={classes.lightbulb__button} onClick={toggleOn}>
         <svg
-          className="lightbulb__icon"
+          className={classes.lightbulb__icon}
           width="24"
           height="24"
           xmlns="http://www.w3.org/2000/svg"

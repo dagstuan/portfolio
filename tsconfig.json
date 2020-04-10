@@ -1,0 +1,17 @@
+{
+  "compilerOptions": {
+    "module": "commonjs",
+    "target": "esnext",
+    "jsx": "preserve",
+    "lib": ["dom", "es2015", "es2017"],
+    "strict": true,
+    "noEmit": true,
+    "noUnusedLocals": true,
+    "noUnusedParameters": true,
+    "noImplicitAny": true,
+    "noImplicitThis": true,
+    "plugins": [{ "name": "typescript-plugin-css-modules" }]
+  },
+  "files": ["custom.d.ts"],
+  "include": ["./src/**/*", "custom.d.ts"]
+}

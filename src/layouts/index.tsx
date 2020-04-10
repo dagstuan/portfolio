@@ -7,7 +7,8 @@ import classNames from 'classnames';
 import Menu from '../components/menu';
 import Lightbulb from '../components/lightbulb';
 
-import '../stylesheets/styles.less';
+// import '../stylesheets/styles.less';
+import * as classes from './layout.module.less';
 
 import { descriptionMetaTags, titleMetaTags } from '../utils/metaUtils';
 import useLocalStorage from '../hooks/useLocalStorage';
@@ -51,6 +52,17 @@ const query = graphql`
   }
 `;
 
+type CategoryQueryReturn = {
+  allContentfulCategory: {
+    edges: {
+      node: {
+        title: string;
+        slug: string;
+      };
+    }[];
+  };
+};
+
 const Layout: FC = ({ children }) => {
   const [menuOpen, setMenuOpen] = useState(false);
   const [dark, setDark] = useState(false);
@@ -58,7 +70,7 @@ const Layout: FC = ({ children }) => {
     'dark',
     false
   );
-  const { allContentfulCategory } = useStaticQuery(query);
+  const { allContentfulCategory } = useStaticQuery<CategoryQueryReturn>(query);
 
   const toggleMenu = useCallback(() => {
     setMenuOpen(!menuOpen);
@@ -78,12 +90,12 @@ const Layout: FC = ({ children }) => {
     setDark(localStorageDark);
   }, []);
 
-  const wrapperClass = classNames('wrapper', {
+  const wrapperClass = classNames(classes.wrapper, {
     'dark-mode': dark,
   });
 
-  const menuOverlayClass = classNames('menu-open-overlay', {
-    'menu-open-overlay--menu-open': menuOpen,
+  const menuOverlayClass = classNames(classes.menuOpenOverlay, {
+    [classes.menuOpenOverlayMenuOpen]: menuOpen,
   });
 
   return (

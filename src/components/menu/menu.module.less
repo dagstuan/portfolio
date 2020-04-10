@@ -1,9 +1,16 @@
+@import '../../styles/variables.less';
+
 @menu-width: 30vw;
 
 @toggle-icon-width: 1.5rem;
 @toggle-icon-height: 1.125rem;
 
 @toggle-icon-padding: (100% - @toggle-icon-width) / 2;
+
+.transition(@property) {
+  transition: @property 0.5s;
+  transition-timing-function: cubic-bezier(0.84, 0, 0.22, 1);
+}
 
 .menu-toggle {
   cursor: pointer;
@@ -166,7 +173,7 @@
   }
 }
 
-.dark-mode {
+:global(.dark-mode) {
   .menu-toggle__icon-line {
     background-color: @color--white;
   }

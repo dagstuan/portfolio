@@ -1,9 +1,4 @@
-.category-title {
-  position: absolute;
-  left: @space-left-right;
-  top: @space-top;
-  margin: 0;
-}
+@import '../styles/variables.less';
 
 .category-elems {
   list-style-type: none;
@@ -84,7 +79,7 @@
   }
 }
 
-.dark-mode {
+:global(.dark-mode) {
   .category-elem {
     &__image-wrapper {
       &:before {

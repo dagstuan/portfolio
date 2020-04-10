@@ -4,21 +4,24 @@
   "version": "1.0.0",
   "author": "Dag Stuan <d.stuan@gmail.com>",
   "dependencies": {
+    "@types/classnames": "^2.2.10",
     "@types/react-helmet": "^5.0.15",
     "classnames": "^2.2.6",
-    "gatsby": "^2.20.12",
-    "gatsby-image": "^2.3.1",
+    "gatsby": "^2.20.15",
+    "gatsby-image": "^2.3.2",
     "gatsby-plugin-canonical-urls": "^2.2.1",
     "gatsby-plugin-gtag": "^1.0.13",
     "gatsby-plugin-layout": "^1.2.1",
     "gatsby-plugin-less": "^3.1.1",
+    "gatsby-plugin-less-modules-typings": "^1.0.0",
     "gatsby-plugin-nprogress": "^2.2.1",
     "gatsby-plugin-react-helmet-async": "^1.0.16",
     "gatsby-plugin-sitemap": "^2.3.1",
     "gatsby-plugin-typescript": "^2.3.1",
     "gatsby-plugin-web-font-loader": "^1.0.4",
-    "gatsby-source-contentful": "^2.2.6",
+    "gatsby-source-contentful": "^2.2.7",
     "gatsby-transformer-remark": "^2.7.1",
+    "gatsby-transformer-typescript-css-modules": "^1.0.14",
     "less": "^3.11.1",
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
@@ -34,10 +37,12 @@
     "develop": "gatsby develop",
     "format": "prettier --write 'src/**/*.js'",
     "test": "echo \"Error: no test specified\" && exit 1",
-    "prettier": "prettier src/**/*.js src/**/*.less --write"
+    "prettier": "prettier --write ."
   },
   "devDependencies": {
     "gatsby-plugin-force-trailing-slashes": "^1.0.4",
-    "prettier": "^2.0.2"
+    "prettier": "^2.0.4",
+    "typescript": "^3.8.3",
+    "typescript-plugin-css-modules": "^2.2.0"
   }
 }

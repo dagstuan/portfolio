@@ -9,7 +9,7 @@ export default function useKeyPress(...targetKeys: IKey[]) {
   const [keyPressed, setKeyPressed] = useState(false);
 
   const downHandler = (event: KeyboardEvent) => {
-    const targetKey = targetKeys.find(k => k.key === event.key);
+    const targetKey = targetKeys.find((k) => k.key === event.key);
 
     if (targetKey) {
       event.preventDefault();
@@ -20,7 +20,7 @@ export default function useKeyPress(...targetKeys: IKey[]) {
   };
 
   const upHandler = (event: KeyboardEvent) => {
-    const targetKey = targetKeys.find(k => k.key === event.key);
+    const targetKey = targetKeys.find((k) => k.key === event.key);
 
     if (targetKey) {
       event.preventDefault();
