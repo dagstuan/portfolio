@@ -65,7 +65,6 @@ type CategoryQueryReturn = {
 
 const Layout: FC = ({ children }) => {
   const [menuOpen, setMenuOpen] = useState(false);
-  const [dark, setDark] = useState(false);
   const [localStorageDark, setLocalStorageDark] = useLocalStorage(
     'dark',
     false
@@ -81,17 +80,11 @@ const Layout: FC = ({ children }) => {
   }, []);
 
   const toggleDark = useCallback(() => {
-    const nextDark = !dark;
-    setDark(nextDark);
-    setLocalStorageDark(nextDark);
-  }, [dark]);
-
-  useLayoutEffect(() => {
-    setDark(localStorageDark);
+    setLocalStorageDark((dark) => !dark);
   }, []);
 
   const wrapperClass = classNames(classes.wrapper, {
-    'dark-mode': dark,
+    'dark-mode': localStorageDark,
   });
 
   const menuOverlayClass = classNames(classes.menuOpenOverlay, {
@@ -127,7 +120,7 @@ const Layout: FC = ({ children }) => {
 
         {children}
 
-        <Lightbulb on={!dark} toggleOn={toggleDark} />
+        <Lightbulb on={!localStorageDark} toggleOn={toggleDark} />
       </main>
     </HelmetProvider>
   );
