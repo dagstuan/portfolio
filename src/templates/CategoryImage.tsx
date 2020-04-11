@@ -7,23 +7,68 @@ import {
   useCallback,
   memo,
   useState,
+  useReducer,
 } from 'react';
 import Img from 'gatsby-image';
+import * as classNames from 'classnames';
 import useImageSize from '../hooks/useImageSize';
 import { Image } from '../types/Image';
 import useOnScreen from '../hooks/useOnScreen';
 import usePrevious from '../hooks/usePrevious';
 
 import * as classes from './category.module.less';
+import ImageZoom from './ImageZoom';
+import useKeyPress from '../hooks/useKeyPress';
 
 interface ICategoryImageProps {
   imageRef: RefObject<any>;
   image: Image;
   index: number;
   critical: boolean;
-  onImageLoad: (id: string) => void;
+  onImageLoad: (index: number) => void;
   onImageVisible: (index: number) => void;
 }
+
+export type ZoomAction = {
+  type:
+    | 'startOpening'
+    | 'setVisible'
+    | 'setOpen'
+    | 'startClosing'
+    | 'setClosed';
+};
+
+type ZoomStatus = 'opening' | 'open' | 'closing' | 'closed';
+
+export type ZoomState = {
+  state: ZoomStatus;
+  visible: boolean;
+};
+
+const categoryImageReducer = (
+  state: ZoomState,
+  action: ZoomAction
+): ZoomState => {
+  switch (action.type) {
+    case 'startOpening': {
+      return { state: 'opening', visible: false };
+    }
+    case 'setVisible': {
+      return { ...state, visible: true };
+    }
+    case 'setOpen': {
+      return { state: 'open', visible: true };
+    }
+    case 'startClosing': {
+      return { state: 'closing', visible: true };
+    }
+    case 'setClosed': {
+      return { state: 'closed', visible: false };
+    }
+    default:
+      return state;
+  }
+};
 
 const CategoryImage: FC<ICategoryImageProps> = (props) => {
   const {
@@ -35,8 +80,18 @@ const CategoryImage: FC<ICategoryImageProps> = (props) => {
     onImageVisible,
   } = props;
   const [isLoaded, setIsLoaded] = useState(false);
+
   const previousCritical = usePrevious(critical);
   const visible = useOnScreen(imageRef);
+  const imageWrapperRef = useRef<HTMLDivElement>(null);
+
+  const buttonRef = useRef<HTMLButtonElement>(null);
+
+  const [zoomState, dispatch] = useReducer(categoryImageReducer, {
+    state: 'closed',
+    visible: false,
+  });
+  const { state: zoomStatus, visible: zoomVisible } = zoomState;
 
   useEffect(() => {
     if (visible) {
@@ -46,8 +101,28 @@ const CategoryImage: FC<ICategoryImageProps> = (props) => {
 
   const onImageLoadCallback = useCallback(() => {
     setIsLoaded(true);
-    onImageLoad(image.id);
-  }, [onImageLoad]);
+    onImageLoad(index);
+  }, [onImageLoad, index]);
+
+  const openZoom = useCallback(() => {
+    dispatch({ type: 'startOpening' });
+  }, []);
+
+  const closeZoom = useCallback(() => {
+    dispatch({ type: 'startClosing' });
+  }, []);
+
+  const spaceKeyPressed = useKeyPress({ key: ' ' });
+
+  useEffect(() => {
+    if (spaceKeyPressed) {
+      if (visible && zoomStatus === 'closed') {
+        openZoom();
+      } else if (zoomStatus === 'open') {
+        closeZoom();
+      }
+    }
+  }, [spaceKeyPressed, zoomState, visible]);
 
   const containerRef = useRef<HTMLDivElement>(null);
   const { imageWidth, imageHeight } = useImageSize(containerRef, image);
@@ -62,21 +137,42 @@ const CategoryImage: FC<ICategoryImageProps> = (props) => {
         ref={containerRef}
       >
         <div
-          className={classes.categoryElem__imageWrapper}
+          className={classNames(classes.categoryElem__imageWrapper, {
+            [classes.categoryElem__imageWrapperZoomOpen]: zoomVisible,
+          })}
           style={{
             width: imageWidth,
             height: imageHeight,
           }}
+          ref={imageWrapperRef}
         >
           <Img
-            key={shouldBeCritical.toString()}
             onLoad={onImageLoadCallback}
             fluid={image.image.fluid}
             alt={image.title}
             style={{ width: '100%', height: '100%' }}
             loading={shouldBeCritical ? 'eager' : 'lazy'}
           />
+
+          {isLoaded && (
+            <button
+              className={classes.imageButton}
+              aria-label="Open zoom"
+              onClick={openZoom}
+              ref={buttonRef}
+              type="button"
+            />
+          )}
         </div>
+
+        {isLoaded && (
+          <ImageZoom
+            state={zoomState}
+            dispatch={dispatch}
+            image={image}
+            parentRef={imageWrapperRef}
+          />
+        )}
       </div>
     </li>
   );

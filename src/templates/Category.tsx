@@ -64,11 +64,11 @@ const CategoryPage: FunctionComponent<ICategoryPageProps> = ({
   },
 }) => {
   const imageRefs = useRef([...images.map((_) => createRef<HTMLElement>())]);
-  const [anyLoadedImages, setAnyLoadedImages] = useState(false);
+  const [loadedImages, setLoadedImages] = React.useState<Array<number>>([]);
   const [visibleImageIndex, setVisibleImageIndex] = useState<number>(0);
 
-  const onImageLoad = useCallback(() => {
-    setAnyLoadedImages(true);
+  const onImageLoad = useCallback((index: number) => {
+    setLoadedImages((loadedImages) => [...loadedImages, index]);
   }, []);
 
   const setVisibleImageIndexCallback = useCallback((index: number) => {
@@ -76,13 +76,11 @@ const CategoryPage: FunctionComponent<ICategoryPageProps> = ({
   }, []);
 
   const prevKeyPressed = useKeyPress(
-    { key: ' ', shiftKey: true },
     { key: 'j' },
     { key: 'ArrowLeft' },
     { key: 'ArrowUp' }
   );
   const nextKeyPressed = useKeyPress(
-    { key: ' ' },
     { key: 'k' },
     { key: 'ArrowRight' },
     { key: 'ArrowDown' }
@@ -103,6 +101,8 @@ const CategoryPage: FunctionComponent<ICategoryPageProps> = ({
       nextRef.current.scrollIntoView({ behavior: 'smooth' });
     }
   }, [imageRefs, prevKeyPressed, nextKeyPressed]);
+
+  const loadAllImages = loadedImages.includes(visibleImageIndex);
 
   return (
     <>
@@ -126,7 +126,7 @@ const CategoryPage: FunctionComponent<ICategoryPageProps> = ({
                 key={id}
                 index={index}
                 image={image}
-                critical={anyLoadedImages}
+                critical={loadAllImages}
                 onImageLoad={onImageLoad}
                 onImageVisible={setVisibleImageIndexCallback}
               />
