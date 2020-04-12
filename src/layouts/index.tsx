@@ -11,6 +11,11 @@ import * as classes from './layout.module.less';
 
 import { descriptionMetaTags, titleMetaTags } from '../utils/metaUtils';
 
+import * as smoothscroll from 'smoothscroll-polyfill';
+
+// kick off the polyfill!
+smoothscroll.polyfill();
+
 const metaKeywords = [
   'photographers',
   'photography',
