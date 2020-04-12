@@ -81,7 +81,9 @@ const CategoryImage = (props: CategoryImageProps) => {
   const [isLoaded, setIsLoaded] = useState(false);
 
   const previousCritical = usePrevious(critical);
-  const visible = useOnScreen(imageRef);
+  const containerRef = useRef<HTMLDivElement>(null);
+
+  const visible = useOnScreen(containerRef);
   const imageWrapperRef = useRef<HTMLDivElement>(null);
 
   const buttonRef = useRef<HTMLButtonElement>(null);
@@ -123,7 +125,6 @@ const CategoryImage = (props: CategoryImageProps) => {
     }
   }, [spaceKeyPressed, zoomState, visible]);
 
-  const containerRef = useRef<HTMLDivElement>(null);
   const { imageWidth, imageHeight } = useImageSize(containerRef, image);
 
   // Make sure we keep the image as critical if it was ever critical

@@ -27,8 +27,8 @@ export default function useImageSize(
       return;
     }
 
-    const newContainerWidth = containerRef.current.offsetWidth;
-    const newContainerHeight = containerRef.current.offsetHeight;
+    const newContainerWidth = containerRef.current?.offsetWidth ?? 0;
+    const newContainerHeight = containerRef.current?.offsetHeight ?? 0;
 
     if (
       containerWidth === newContainerWidth &&

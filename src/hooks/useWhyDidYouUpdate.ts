@@ -1,20 +1,26 @@
 import { useRef, useEffect } from 'react';
 
-export default function useWhyDidYouUpdate(name: string, props: object) {
+export default function useWhyDidYouUpdate(
+  name: string,
+  props: Record<string, object>
+) {
   // Get a mutable ref object where we can store props ...
   // ... for comparison next time this hook runs.
-  const previousProps = useRef<object>();
+  const previousProps = useRef<Record<string, object>>();
 
   useEffect(() => {
     if (previousProps.current) {
       // Get all keys from previous and current props
       const allKeys = Object.keys({ ...previousProps.current, ...props });
       // Use this object to keep track of changed props
-      const changesObj = {};
+      const changesObj: Record<string, object> = {};
       // Iterate through keys
       allKeys.forEach((key) => {
         // If previous is different from current
-        if (previousProps.current[key] !== props[key]) {
+        if (
+          previousProps.current &&
+          previousProps.current[key] !== props[key]
+        ) {
           // Add to changesObj
           changesObj[key] = {
             from: previousProps.current[key],
