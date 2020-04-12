@@ -1,4 +1,5 @@
 export const categoryElems: string;
+export const boxShadow: string;
 export const categoryElem: string;
 export const categoryElem__imageOuterWrapper: string;
 export const categoryElem__imageWrapper: string;
@@ -8,3 +9,4 @@ export const imageButtonClose: string;
 export const imageZoomWrapper: string;
 export const imageZoomWrapperOpen: string;
 export const imageZoom: string;
+export const imageZoomVisible: string;

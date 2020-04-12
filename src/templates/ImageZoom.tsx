@@ -183,7 +183,9 @@ function ImageZoom(props: ImageZoomProps) {
       })}
     >
       <img
-        className={classes.imageZoom}
+        className={classNames(classes.imageZoom, {
+          [classes.imageZoomVisible]: state.visible,
+        })}
         src={image.image.fluid.src}
         alt={image.title}
         style={imageStyle}
