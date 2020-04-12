@@ -13,8 +13,9 @@ import { descriptionMetaTags, titleMetaTags } from '../utils/metaUtils';
 
 import * as smoothscroll from 'smoothscroll-polyfill';
 
-// kick off the polyfill!
-smoothscroll.polyfill();
+if (typeof window !== 'undefined') {
+  smoothscroll.polyfill();
+}
 
 const metaKeywords = [
   'photographers',
