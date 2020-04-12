@@ -11,10 +11,15 @@ import * as classes from './layout.module.less';
 
 import { descriptionMetaTags, titleMetaTags } from '../utils/metaUtils';
 
-import * as smoothscroll from 'smoothscroll-polyfill';
+//import * as smoothscroll from 'smoothscroll-polyfill';
 
-if (typeof window !== 'undefined') {
-  smoothscroll.polyfill();
+if (
+  typeof window !== 'undefined' &&
+  'scrollBehavior' in document.documentElement.style === false
+) {
+  import('smoothscroll-polyfill').then((smoothscroll) =>
+    smoothscroll.polyfill()
+  );
 }
 
 const metaKeywords = [
