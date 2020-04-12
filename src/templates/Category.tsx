@@ -19,6 +19,7 @@ import { imageMetaTags, titleMetaTags } from '../utils/metaUtils';
 import CategoryImage from './CategoryImage';
 import { ContentfulCategory as IContentfulCategory } from '../types/category';
 import useKeyPress from '../hooks/useKeyPress';
+import * as nProgress from 'nprogress';
 
 export const query = graphql`
   query PostQuery($slug: String!) {
@@ -65,6 +66,16 @@ const CategoryPage = ({
   const imageRefs = useRef([...images.map((_) => createRef<HTMLElement>())]);
   const [loadedImages, setLoadedImages] = React.useState<Array<number>>([]);
   const [visibleImageIndex, setVisibleImageIndex] = useState<number>(0);
+
+  React.useEffect(() => {
+    if (!nProgress.isStarted()) {
+      nProgress.start();
+    }
+
+    if (images.every((_, index) => loadedImages.includes(index))) {
+      nProgress.done();
+    }
+  }, [loadedImages, images]);
 
   const onImageLoad = useCallback((index: number) => {
     setLoadedImages((loadedImages) => [...loadedImages, index]);

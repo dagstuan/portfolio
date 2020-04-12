@@ -3,6 +3,7 @@ import { useStaticQuery, graphql } from 'gatsby';
 import Img from 'gatsby-image';
 import { Helmet } from 'react-helmet-async';
 import * as classNames from 'classnames';
+import * as nprogress from 'nprogress';
 
 import * as classes from './index.module.less';
 import * as layoutClasses from '../../layouts/layout.module.less';
@@ -10,6 +11,7 @@ import * as layoutClasses from '../../layouts/layout.module.less';
 import logo from '../../assets/logo.svg';
 
 import { imageMetaTags } from '../../utils/metaUtils';
+import useWhyDidYouUpdate from '../../hooks/useWhyDidYouUpdate';
 
 const query = graphql`
   query {
@@ -54,6 +56,22 @@ const IndexPage = () => {
     },
   } = data.contentfulHome;
 
+  const [isLoaded, setIsLoaded] = React.useState(false);
+
+  React.useEffect(() => {
+    if (isLoaded && nprogress.isStarted()) {
+      nprogress.done();
+    }
+
+    if (!isLoaded && !nprogress.isStarted()) {
+      nprogress.start();
+    }
+  }, [isLoaded]);
+
+  const onImageLoad = React.useCallback(() => {
+    setIsLoaded(true);
+  }, []);
+
   return (
     <>
       <Helmet>{imageMetaTags(resize, title)}</Helmet>
@@ -68,6 +86,7 @@ const IndexPage = () => {
             top: 0,
             bottom: 0,
           }}
+          onLoad={onImageLoad}
         />
         <div className={layoutClasses.title__wrapper}>
           <img
@@ -81,4 +100,4 @@ const IndexPage = () => {
   );
 };
 
-export default IndexPage;
+export default React.memo(IndexPage);

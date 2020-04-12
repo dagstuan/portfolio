@@ -5,13 +5,11 @@ import { Helmet, HelmetProvider } from 'react-helmet-async';
 import classNames from 'classnames';
 
 import Menu from '../components/menu';
-import Lightbulb from '../components/lightbulb';
 
+import 'nprogress/nprogress.css';
 import * as classes from './layout.module.less';
 
 import { descriptionMetaTags, titleMetaTags } from '../utils/metaUtils';
-import useLocalStorage from '../hooks/useLocalStorage';
-import useIsClient from '../hooks/useIsClient';
 
 const metaKeywords = [
   'photographers',
@@ -78,27 +76,13 @@ const useMenu = (): [boolean, () => void, () => void] => {
 };
 
 const Layout: FC = ({ children }) => {
-  const isClient = useIsClient();
-
-  const [darkMode, setDarkMode] = useLocalStorage('dark', false);
   const { allContentfulCategory } = useStaticQuery<CategoryQueryReturn>(query);
 
   const [menuOpen, toggleMenu, closeMenu] = useMenu();
 
-  const toggleDark = React.useCallback(
-    () => setDarkMode((currDark) => !currDark),
-    []
-  );
-
-  const wrapperClass = classNames(classes.wrapper, {
-    'dark-mode': darkMode,
-  });
-
   const menuOverlayClass = classNames(classes.menuOpenOverlay, {
     [classes.menuOpenOverlayMenuOpen]: menuOpen,
   });
-
-  const key = isClient ? `client` : `server`;
 
   return (
     <HelmetProvider>
@@ -117,7 +101,7 @@ const Layout: FC = ({ children }) => {
           href="https://emojipedia-us.s3.dualstack.us-west-1.amazonaws.com/thumbs/240/apple/232/camera_1f4f7.png"
         />
       </Helmet>
-      <main className={wrapperClass} key={key}>
+      <main className={classes.wrapper}>
         <div className={menuOverlayClass} onClick={closeMenu} />
 
         <Menu
@@ -128,8 +112,6 @@ const Layout: FC = ({ children }) => {
         />
 
         {children}
-
-        <Lightbulb on={!darkMode} toggleOn={toggleDark} />
       </main>
     </HelmetProvider>
   );

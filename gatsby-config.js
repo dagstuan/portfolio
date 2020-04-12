@@ -3,7 +3,6 @@ module.exports = {
     siteUrl: `https://dagstuan.com`,
   },
   plugins: [
-    `gatsby-plugin-layout`,
     'gatsby-plugin-react-helmet-async',
     'gatsby-plugin-less',
     {
@@ -48,5 +47,11 @@ module.exports = {
       },
     },
     'gatsby-plugin-less-modules-typings',
+    {
+      resolve: `gatsby-plugin-layout`,
+      options: {
+        component: require.resolve('./src/layouts/index.tsx'),
+      },
+    },
   ],
 };

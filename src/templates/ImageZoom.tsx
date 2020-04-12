@@ -2,7 +2,6 @@ import * as React from 'react';
 import { createPortal } from 'react-dom';
 import { Image } from '../types/Image';
 import * as nprogress from 'nprogress';
-import 'nprogress/nprogress.css';
 import * as classNames from 'classnames';
 import useWindowSize from '../hooks/useWindowSize';
 import { RefObject, useEffect, useCallback, memo } from 'react';
@@ -120,7 +119,9 @@ function ImageZoom(props: ImageZoomProps) {
   useEffect(() => {
     switch (state.state) {
       case 'opening': {
-        nprogress.start();
+        if (!nprogress.isStarted()) {
+          nprogress.start();
+        }
 
         if (state.visible) {
           setTimeout(() => {
@@ -131,7 +132,10 @@ function ImageZoom(props: ImageZoomProps) {
         break;
       }
       case 'open': {
-        nprogress.done();
+        if (nprogress.isStarted()) {
+          nprogress.done();
+        }
+
         break;
       }
       case 'closing': {
@@ -144,7 +148,7 @@ function ImageZoom(props: ImageZoomProps) {
   }, [state, transitionDuration]);
 
   const handleScroll = useCallback(() => {
-    if (state.state === 'closing') {
+    if (state.visible) {
       // need to recalculate top style while scrolling on closing
       forceUpdate((n) => n + 1);
     }
