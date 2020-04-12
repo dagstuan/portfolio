@@ -1,6 +1,5 @@
 import * as React from 'react';
 import {
-  FC,
   useRef,
   RefObject,
   useEffect,
@@ -20,14 +19,14 @@ import * as classes from './category.module.less';
 import ImageZoom from './ImageZoom';
 import useKeyPress from '../hooks/useKeyPress';
 
-interface ICategoryImageProps {
+type CategoryImageProps = {
   imageRef: RefObject<any>;
   image: Image;
   index: number;
   critical: boolean;
   onImageLoad: (index: number) => void;
   onImageVisible: (index: number) => void;
-}
+};
 
 export type ZoomAction = {
   type:
@@ -70,7 +69,7 @@ const categoryImageReducer = (
   }
 };
 
-const CategoryImage: FC<ICategoryImageProps> = (props) => {
+const CategoryImage = (props: CategoryImageProps) => {
   const {
     imageRef,
     image,

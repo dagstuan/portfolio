@@ -1,7 +1,6 @@
 import * as React from 'react';
 import {
   useState,
-  FunctionComponent,
   useCallback,
   createRef,
   useRef,
@@ -52,17 +51,17 @@ export const query = graphql`
   }
 `;
 
-interface ICategoryPageProps {
+type CategoryPageProps = {
   data: {
     contentfulCategory: IContentfulCategory;
   };
-}
+};
 
-const CategoryPage: FunctionComponent<ICategoryPageProps> = ({
+const CategoryPage = ({
   data: {
     contentfulCategory: { title, images },
   },
-}) => {
+}: CategoryPageProps) => {
   const imageRefs = useRef([...images.map((_) => createRef<HTMLElement>())]);
   const [loadedImages, setLoadedImages] = React.useState<Array<number>>([]);
   const [visibleImageIndex, setVisibleImageIndex] = useState<number>(0);
