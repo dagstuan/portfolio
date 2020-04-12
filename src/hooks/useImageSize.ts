@@ -1,5 +1,5 @@
 import useEventListener from './useEventListener';
-import { useEffect, useState, RefObject } from 'react';
+import { useEffect, useState, RefObject, useCallback } from 'react';
 import { Image } from '../types/Image';
 
 const getImageAspectRatio = (image: Image) => {
@@ -19,7 +19,7 @@ export default function useImageSize(
   const [containerWidth, setContainerWidth] = useState(0);
   const [containerHeight, setContainerHeight] = useState(0);
 
-  const updateDimensions = () => {
+  const updateDimensions = useCallback(() => {
     const windowWidth = typeof window !== `undefined` ? window.innerWidth : 0;
     if (windowWidth <= 750) {
       setImageWidth('100%');
@@ -49,7 +49,7 @@ export default function useImageSize(
       setImageHeight(`${newContainerWidth / aspectRatio}px`);
       setImageWidth(`${newContainerWidth}px`);
     }
-  };
+  }, [containerWidth, containerHeight, containerRef.current]);
 
   useEventListener('resize', updateDimensions);
 

@@ -86,8 +86,6 @@ const CategoryImage = (props: CategoryImageProps) => {
   const visible = useOnScreen(containerRef);
   const imageWrapperRef = useRef<HTMLDivElement>(null);
 
-  const buttonRef = useRef<HTMLButtonElement>(null);
-
   const [zoomState, dispatch] = useReducer(categoryImageReducer, {
     state: 'closed',
     visible: false,
@@ -156,10 +154,9 @@ const CategoryImage = (props: CategoryImageProps) => {
 
           {isLoaded && (
             <button
-              className={classes.imageButton}
+              className={classes.imageZoomButton}
               aria-label="Open zoom"
               onClick={openZoom}
-              ref={buttonRef}
               type="button"
             />
           )}

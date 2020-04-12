@@ -3,7 +3,6 @@ import { createPortal } from 'react-dom';
 import { Image } from '../types/Image';
 import * as nprogress from 'nprogress';
 import * as classNames from 'classnames';
-import useWindowSize from '../hooks/useWindowSize';
 import { RefObject, useEffect, useCallback, memo } from 'react';
 
 import * as classes from './category.module.less';
@@ -33,29 +32,45 @@ const getScale = ({
 
 const getImageStyle = (
   state: ZoomState,
-  windowWidth: number,
-  windowHeight: number,
-  originalWidth: number,
-  originalHeight: number,
-  originalTop: number,
-  originalLeft: number,
+  parentRef: React.RefObject<HTMLElement>,
   transitionDuration: number
 ): React.CSSProperties => {
-  let returnStyles = {
-    width: originalWidth,
+  const windowWidth = window?.innerWidth ?? 0;
+  const windowHeight = window?.innerHeight ?? 0;
+
+  const {
     height: originalHeight,
     left: originalLeft,
     top: originalTop,
+    width: originalWidth,
+  } = parentRef.current?.getBoundingClientRect() ?? {
+    width: 0,
+    height: 0,
+    top: 0,
+    left: 0,
+  };
+
+  const scrollTop =
+    window.pageYOffset ||
+    document.documentElement.scrollTop ||
+    document.body.scrollTop ||
+    0;
+  const scrollLeft =
+    window.pageXOffset ||
+    document.documentElement.scrollLeft ||
+    document.body.scrollLeft ||
+    0;
+
+  const returnStyles = {
+    width: originalWidth,
+    height: originalHeight,
+    left: originalLeft + scrollLeft,
+    top: originalTop + scrollTop,
     transitionDuration: `${transitionDuration}ms`,
   };
 
   if (state.state !== 'open') {
-    const initTransform = [`scale(1)`, `translate(0, 0)`].join(' ');
-
-    return {
-      ...returnStyles,
-      transform: initTransform,
-    };
+    return returnStyles;
   }
 
   const scale = getScale({
@@ -65,21 +80,15 @@ const getImageStyle = (
     windowHeight,
   });
 
-  // Get the the coords for center of the viewport
-  const viewportX = windowWidth / 2;
-  const viewportY = windowHeight / 2;
+  const translateX =
+    (-originalLeft + (windowWidth - originalWidth) / 2) / scale;
 
-  // Get the coords for center of the parent item
-  const childCenterX = originalLeft + originalWidth / 2;
-  const childCenterY = originalTop + originalHeight / 2;
-
-  // Get offset amounts for item coords to be centered on screen
-  const translateX = (viewportX - childCenterX) / scale;
-  const translateY = (viewportY - childCenterY) / scale;
+  const translateY =
+    (-originalTop + (windowHeight - originalHeight) / 2) / scale;
 
   const transform = [
     `scale(${scale})`,
-    `translate(${translateX}px, ${translateY}px)`,
+    `translate3d(${translateX}px, ${translateY}px, 0)`,
   ].join(' ');
 
   return {
@@ -90,23 +99,6 @@ const getImageStyle = (
 
 function ImageZoom(props: ImageZoomProps) {
   const { state, dispatch, image, parentRef, transitionDuration = 250 } = props;
-
-  const [, forceUpdate] = React.useState(0);
-
-  const { width: windowWidth = 0, height: windowHeight = 0 } = useWindowSize();
-
-  // get parent element's dimensions
-  const {
-    height: originalHeight,
-    left: originalLeft,
-    top: originalTop,
-    width: originalWidth,
-  } = parentRef.current?.getBoundingClientRect() ?? {
-    height: 0,
-    left: 0,
-    top: 0,
-    width: 0,
-  };
 
   const setVisible = useCallback(() => {
     dispatch({ type: 'setVisible' });
@@ -147,41 +139,28 @@ function ImageZoom(props: ImageZoomProps) {
     }
   }, [state, transitionDuration]);
 
-  const handleScroll = useCallback(() => {
-    if (state.visible) {
-      // need to recalculate top style while scrolling on closing
-      forceUpdate((n) => n + 1);
-    }
-
+  const closeIfOpen = useCallback(() => {
     if (state.state === 'open') {
       dispatch({ type: 'startClosing' });
     }
-  }, [state]);
+  }, [state.state]);
 
-  useEventListener('scroll', handleScroll);
+  useEventListener('scroll', closeIfOpen);
+  useEventListener('resize', closeIfOpen);
 
   if (state.state === 'closed') {
     return null;
   }
 
-  const imageStyle = getImageStyle(
-    state,
-    windowWidth,
-    windowHeight,
-    originalWidth,
-    originalHeight,
-    originalTop,
-    originalLeft,
-    transitionDuration
-  );
+  const imageStyle = getImageStyle(state, parentRef, transitionDuration);
 
   return createPortal(
-    <div
-      aria-modal="true"
-      className={classNames(classes.imageZoomWrapper, {
-        [classes.imageZoomWrapperOpen]: state.state === 'open',
-      })}
-    >
+    <>
+      <div
+        className={classNames(classes.imageZoomBackground, {
+          [classes.imageZoomBackgroundOpen]: state.state === 'open',
+        })}
+      ></div>
       <img
         className={classNames(classes.imageZoom, {
           [classes.imageZoomVisible]: state.visible,
@@ -192,12 +171,14 @@ function ImageZoom(props: ImageZoomProps) {
         loading="eager"
         onLoad={setVisible}
       />
-
       <button
-        className={classNames(classes.imageButton, classes.imageButtonClose)}
+        className={classNames(
+          classes.imageZoomButton,
+          classes.imageZoomButtonClose
+        )}
         onClick={handleCloseClick}
       />
-    </div>,
+    </>,
     document.body
   );
 }
