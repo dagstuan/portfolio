@@ -59,12 +59,10 @@ const IndexPage = () => {
   const [isLoaded, setIsLoaded] = React.useState(false);
 
   React.useEffect(() => {
-    if (isLoaded && nprogress.isStarted()) {
-      nprogress.done();
-    }
-
     if (!isLoaded && !nprogress.isStarted()) {
       nprogress.start();
+    } else if (isLoaded && nprogress.isStarted()) {
+      nprogress.done();
     }
   }, [isLoaded]);
 
