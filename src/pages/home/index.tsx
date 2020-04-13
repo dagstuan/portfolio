@@ -11,7 +11,6 @@ import * as layoutClasses from '../../layouts/layout.module.less';
 import logo from '../../assets/logo.svg';
 
 import { imageMetaTags } from '../../utils/metaUtils';
-import useWhyDidYouUpdate from '../../hooks/useWhyDidYouUpdate';
 
 const query = graphql`
   query {

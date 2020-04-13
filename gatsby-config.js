@@ -42,7 +42,7 @@ module.exports = {
       resolve: 'gatsby-plugin-web-font-loader',
       options: {
         google: {
-          families: ['Cinzel:400,700', 'Lato'],
+          families: ['Roboto:100,300'],
         },
       },
     },
