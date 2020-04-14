@@ -1,3 +1,3 @@
-export function gtagEvent(event: string) {
-  window?.gtag && window.gtag('event', event);
+export function gtagEvent(event: string, params: Gtag.EventParams) {
+  window?.gtag && window.gtag('event', event, params);
 }

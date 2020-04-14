@@ -105,12 +105,18 @@ const CategoryImage = (props: CategoryImageProps) => {
   }, [onImageLoad, index]);
 
   const openZoom = useCallback(() => {
-    gtagEvent('openZoom');
+    gtagEvent('openZoom', {
+      event_category: 'zoom',
+      event_label: 'open',
+    });
     dispatch({ type: 'startOpening' });
   }, []);
 
   const closeZoom = useCallback(() => {
-    gtagEvent('closeZoom');
+    gtagEvent('closeZoom', {
+      event_category: 'zoom',
+      event_label: 'close',
+    });
     dispatch({ type: 'startClosing' });
   }, []);
 

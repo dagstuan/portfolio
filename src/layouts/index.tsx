@@ -75,12 +75,18 @@ const useMenu = (): [boolean, () => void, () => void] => {
   const [menuOpen, setMenuOpen] = useState(false);
 
   const toggleMenu = useCallback(() => {
-    gtagEvent('toogleMenu');
+    gtagEvent('toogleMenu', {
+      event_category: 'menu',
+      event_label: 'toggleMenu',
+    });
     setMenuOpen(!menuOpen);
   }, [menuOpen]);
 
   const closeMenu = useCallback(() => {
-    gtagEvent('closeMenu');
+    gtagEvent('closeMenu', {
+      event_category: 'menu',
+      event_label: 'closeMenu',
+    });
     setMenuOpen(false);
   }, []);
 
