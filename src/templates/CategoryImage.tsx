@@ -18,6 +18,7 @@ import usePrevious from '../hooks/usePrevious';
 import * as classes from './category.module.less';
 import ImageZoom from './ImageZoom';
 import useKeyPress from '../hooks/useKeyPress';
+import { gtagEvent } from '../utils/gtagUtils';
 
 type CategoryImageProps = {
   imageRef: RefObject<any>;
@@ -104,10 +105,12 @@ const CategoryImage = (props: CategoryImageProps) => {
   }, [onImageLoad, index]);
 
   const openZoom = useCallback(() => {
+    gtagEvent('openZoom');
     dispatch({ type: 'startOpening' });
   }, []);
 
   const closeZoom = useCallback(() => {
+    gtagEvent('closeZoom');
     dispatch({ type: 'startClosing' });
   }, []);
 

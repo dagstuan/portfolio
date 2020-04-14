@@ -21,11 +21,15 @@ module.exports = {
       },
     },
     {
-      resolve: `gatsby-plugin-gtag`,
+      resolve: `gatsby-plugin-google-gtag`,
       options: {
-        trackingId: `UA-35576492-1`,
-        head: true,
-        anonymize: true,
+        trackingIds: [`UA-35576492-1`],
+        gtagConfig: {
+          anonymize_ip: true,
+        },
+        pluginConfig: {
+          head: true,
+        },
       },
     },
     'gatsby-transformer-remark',

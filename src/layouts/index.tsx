@@ -10,8 +10,7 @@ import 'nprogress/nprogress.css';
 import * as classes from './layout.module.less';
 
 import { descriptionMetaTags, titleMetaTags } from '../utils/metaUtils';
-
-//import * as smoothscroll from 'smoothscroll-polyfill';
+import { gtagEvent } from '../utils/gtagUtils';
 
 if (
   typeof window !== 'undefined' &&
@@ -76,10 +75,12 @@ const useMenu = (): [boolean, () => void, () => void] => {
   const [menuOpen, setMenuOpen] = useState(false);
 
   const toggleMenu = useCallback(() => {
+    gtagEvent('toogleMenu');
     setMenuOpen(!menuOpen);
   }, [menuOpen]);
 
   const closeMenu = useCallback(() => {
+    gtagEvent('closeMenu');
     setMenuOpen(false);
   }, []);
 
