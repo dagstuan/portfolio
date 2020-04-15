@@ -35,8 +35,8 @@ const getImageStyle = (
   parentRef: React.RefObject<HTMLElement>,
   transitionDuration: number
 ): React.CSSProperties => {
-  const windowWidth = window?.innerWidth ?? 0;
-  const windowHeight = window?.innerHeight ?? 0;
+  const windowWidth = document?.documentElement?.clientWidth ?? 0;
+  const windowHeight = document?.documentElement?.clientHeight ?? 0;
 
   const {
     height: originalHeight,
