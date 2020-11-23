@@ -18,7 +18,7 @@ export const descriptionMetaTags = (description: string) => [
 ];
 
 export const imageMetaTags = (
-  { src, width, height }: { src: string; width: string; height: string },
+  { src, width, height }: { src: string; width: number; height: number },
   title: string
 ) => {
   const fixedSrc = `https:${src}`;
@@ -26,8 +26,16 @@ export const imageMetaTags = (
   return [
     <meta key="og:image:alt" property="og:image:alt" content={title} />,
     <meta key="og:image" property="og:image" content={fixedSrc} />,
-    <meta key="og:image:width" property="og:image:width" content={width} />,
-    <meta key="og:image:height" property="og:image:height" content={height} />,
+    <meta
+      key="og:image:width"
+      property="og:image:width"
+      content={width.toString()}
+    />,
+    <meta
+      key="og:image:height"
+      property="og:image:height"
+      content={height.toString()}
+    />,
     <meta
       key={`twitter:image`}
       property={`twitter:image`}

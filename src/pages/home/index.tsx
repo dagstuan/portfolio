@@ -1,9 +1,8 @@
 import * as React from 'react';
 import { useStaticQuery, graphql } from 'gatsby';
-import Img from 'gatsby-image';
+import { FixedObject, FluidObject } from 'gatsby-image';
 import { Helmet } from 'react-helmet-async';
 import * as classNames from 'classnames';
-import * as nprogress from 'nprogress';
 
 import * as classes from './index.module.less';
 import * as layoutClasses from '../../layouts/layout.module.less';
@@ -11,6 +10,16 @@ import * as layoutClasses from '../../layouts/layout.module.less';
 import logo from '../../assets/logo.svg';
 
 import { imageMetaTags } from '../../utils/metaUtils';
+import CoverImage from './CoverImage';
+import { useInterval } from '../../hooks/useInterval';
+
+type ContentfulImage = {
+  title: string;
+  image: {
+    resize: FixedObject;
+    fluid: FluidObject;
+  };
+};
 
 const query = graphql`
   query {
@@ -45,35 +54,67 @@ const query = graphql`
   }
 `;
 
+const getNextImage = (currImageIndex: number, numImages: number) =>
+  (currImageIndex + 1) % numImages;
+
 const IndexPage = () => {
-  const data = useStaticQuery(query);
+  const data = useStaticQuery<{
+    contentfulHome: { coverImages: ContentfulImage[] };
+  }>(query);
 
-  const {
-    cover: {
-      title,
-      image: { resize, fluid },
-    },
-  } = data.contentfulHome;
+  const { coverImages } = data.contentfulHome;
 
-  const [isLoaded, setIsLoaded] = React.useState(false);
+  const [loadedImages, setLoadedImages] = React.useState(
+    coverImages.reduce(
+      (acc, _, i) => ({ ...acc, [i]: false }),
+      {} as Record<number, boolean>
+    )
+  );
 
-  React.useEffect(() => {
-    if (!isLoaded && !nprogress.isStarted()) {
-      nprogress.start();
-    } else if (isLoaded && nprogress.isStarted()) {
-      nprogress.done();
-    }
-  }, [isLoaded]);
-
-  const onImageLoad = React.useCallback(() => {
-    setIsLoaded(true);
+  const setImageLoaded = React.useCallback((index: number) => {
+    setLoadedImages((loadedImages) => ({ ...loadedImages, [index]: true }));
   }, []);
+
+  const [visibleImage, setVisibleImage] = React.useState(
+    Math.floor(Math.random() * coverImages.length)
+  );
+
+  const updateVisibleImage = React.useCallback(() => {
+    setVisibleImage((currImg) => getNextImage(currImg, coverImages.length));
+  }, [coverImages.length]);
+
+  useInterval(updateVisibleImage, loadedImages[visibleImage] ? 7500 : null);
+
+  const getLoading = (imageIndex: number) =>
+    imageIndex === visibleImage ||
+    (loadedImages[visibleImage] &&
+      imageIndex == getNextImage(visibleImage, coverImages.length))
+      ? 'eager'
+      : 'lazy';
+
+  console.log(loadedImages);
 
   return (
     <>
-      <Helmet>{imageMetaTags(resize, title)}</Helmet>
+      <Helmet>
+        {imageMetaTags(coverImages[0].image.resize, coverImages[0].title)}
+      </Helmet>
       <div className={classes.home}>
-        <Img
+        {coverImages.map((ci: ContentfulImage, index) => {
+          console.log(`index: ${index}, loading: ${getLoading(index)}`);
+
+          return (
+            <CoverImage
+              key={ci.title}
+              title={ci.title}
+              fluid={ci.image.fluid}
+              onLoad={() => setImageLoaded(index)}
+              loading={getLoading(index)}
+              visible={index === visibleImage}
+            />
+          );
+        })}
+        {/* <Img
           alt={title}
           fluid={fluid}
           style={{
@@ -84,7 +125,7 @@ const IndexPage = () => {
             bottom: 0,
           }}
           onLoad={onImageLoad}
-        />
+        /> */}
         <div className={layoutClasses.title__wrapper}>
           <img
             className={classNames(layoutClasses.title, classes.home__logoImage)}
