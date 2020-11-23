@@ -79,20 +79,22 @@ const IndexPage = () => {
     Math.floor(Math.random() * coverImages.length)
   );
 
-  const updateVisibleImage = React.useCallback(() => {
-    setVisibleImage((currImg) => getNextImage(currImg, coverImages.length));
-  }, [coverImages.length]);
+  const nextImage = getNextImage(visibleImage, coverImages.length);
 
-  useInterval(updateVisibleImage, loadedImages[visibleImage] ? 7500 : null);
+  const updateVisibleImage = React.useCallback(() => {
+    setVisibleImage(nextImage);
+  }, [nextImage]);
+
+  useInterval(
+    updateVisibleImage,
+    loadedImages[visibleImage] && loadedImages[nextImage] ? 7500 : null
+  );
 
   const getLoading = (imageIndex: number) =>
     imageIndex === visibleImage ||
-    (loadedImages[visibleImage] &&
-      imageIndex == getNextImage(visibleImage, coverImages.length))
+    (loadedImages[visibleImage] && imageIndex == nextImage)
       ? 'eager'
       : 'lazy';
-
-  console.log(loadedImages);
 
   return (
     <>
@@ -101,8 +103,6 @@ const IndexPage = () => {
       </Helmet>
       <div className={classes.home}>
         {coverImages.map((ci: ContentfulImage, index) => {
-          console.log(`index: ${index}, loading: ${getLoading(index)}`);
-
           return (
             <CoverImage
               key={ci.title}

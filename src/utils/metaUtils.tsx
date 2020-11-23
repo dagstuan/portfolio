@@ -18,7 +18,11 @@ export const descriptionMetaTags = (description: string) => [
 ];
 
 export const imageMetaTags = (
-  { src, width, height }: { src: string; width: string; height: string },
+  {
+    src,
+    width,
+    height,
+  }: { src: string; width: string | number; height: string | number },
   title: string
 ) => {
   const fixedSrc = `https:${src}`;
