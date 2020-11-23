@@ -27,7 +27,7 @@ function CoverImage(props: CoverImageProps) {
       fluid={fluid}
       className={classes.coverImage}
       style={{
-        display: loading === 'eager' || isLoaded ? 'block' : 'none',
+        // display: loading === 'eager' || isLoaded ? 'block' : 'none',
         width: '100%',
         margin: '12vh auto',
         position: 'absolute',
@@ -35,7 +35,7 @@ function CoverImage(props: CoverImageProps) {
         bottom: 0,
         opacity: visible ? 1 : 0,
       }}
-      loading={loading}
+      // loading={loading}
       onLoad={onImageLoad}
     />
   );
