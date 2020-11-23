@@ -114,18 +114,6 @@ const IndexPage = () => {
             />
           );
         })}
-        {/* <Img
-          alt={title}
-          fluid={fluid}
-          style={{
-            width: '100%',
-            margin: '12vh auto',
-            position: 'absolute',
-            top: 0,
-            bottom: 0,
-          }}
-          onLoad={onImageLoad}
-        /> */}
         <div className={layoutClasses.title__wrapper}>
           <img
             className={classNames(layoutClasses.title, classes.home__logoImage)}

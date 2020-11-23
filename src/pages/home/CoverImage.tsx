@@ -19,7 +19,7 @@ function CoverImage(props: CoverImageProps) {
   const onImageLoad = React.useCallback(() => {
     setIsLoaded(true);
     onLoad();
-  }, []);
+  }, [onLoad]);
 
   return (
     <Img
