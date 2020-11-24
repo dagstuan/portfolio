@@ -110,6 +110,7 @@ const IndexPage = () => {
               fluid={ci.image.fluid}
               onLoad={() => setImageLoaded(index)}
               loading={getLoading(index)}
+              isLoaded={loadedImages[index]}
               visible={index === visibleImage}
             />
           );
