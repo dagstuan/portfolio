@@ -72,6 +72,7 @@ const IndexPage = () => {
   );
 
   const setImageLoaded = React.useCallback((index: number) => {
+    console.log(`setLoaded ${index}`);
     setLoadedImages((loadedImages) => ({ ...loadedImages, [index]: true }));
   }, []);
 
