@@ -77,7 +77,8 @@ const IndexPage = () => {
   }, []);
 
   const [visibleImage, setVisibleImage] = React.useState(
-    Math.floor(Math.random() * coverImages.length)
+    //Math.floor(Math.random() * coverImages.length)
+    0
   );
 
   console.log(`visibleImage ${visibleImage}`);
