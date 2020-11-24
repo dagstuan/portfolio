@@ -80,6 +80,8 @@ const IndexPage = () => {
     Math.floor(Math.random() * coverImages.length)
   );
 
+  console.log(`visibleImage ${visibleImage}`);
+
   const nextImage = getNextImage(visibleImage, coverImages.length);
 
   const updateVisibleImage = React.useCallback(() => {
