@@ -47,15 +47,21 @@ const Menu = ({ categories, menuOpen, toggleMenu, closeMenu }: MenuProps) => {
 
   return (
     <header>
-      <button className={toggleClass} onClick={toggleMenu}>
-        <span className={classes.menuToggle__label}>Menu</span>
-        <span className={classes.menuToggle__icon}>
-          <span className={classes.menuToggle__iconLine} />
-          <span className={classes.menuToggle__iconLine} />
-          <span className={classes.menuToggle__iconLine} />
-          <span className={classes.menuToggle__iconLine} />
-        </span>
-      </button>
+      <div className={classes.menuToggleWrapper}>
+        <button className={toggleClass} onClick={toggleMenu}>
+          <div className={classes.label}>
+            <span className={classes.labelOpen}>Menu</span>
+            <span className={classes.labelClose}>Close</span>
+          </div>
+          <div className={classes.menuToggle__icon}>
+            <span className={classes.menuToggle__iconLine} />
+            <span className={classes.menuToggle__iconLine} />
+            <span className={classes.menuToggle__iconLine} />
+            <span className={classes.menuToggle__iconLine} />
+          </div>
+        </button>
+      </div>
+
       <nav className={menuClass}>
         <ul className={classes.menu__elems}>
           <MenuElem text="Home" onClick={closeMenu} />
