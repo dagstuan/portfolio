@@ -7,14 +7,20 @@ import * as classes from './index.module.less';
 type CoverImageProps = {
   visible: boolean;
   title: string;
+  index: number;
   fluid: FluidObject;
   loading: `auto` | `lazy` | `eager`;
-  isLoaded: boolean;
-  onLoad: () => void;
+  onLoad: (index: number) => void;
 };
 
 function CoverImage(props: CoverImageProps) {
-  const { visible, isLoaded, loading, title, fluid, onLoad } = props;
+  const { index, visible, loading, title, fluid, onLoad } = props;
+
+  const [isLoaded, setIsLoaded] = React.useState(false);
+  const onImageLoad = React.useCallback(() => {
+    setIsLoaded(true);
+    onLoad(index);
+  }, [index]);
 
   return (
     <Img
@@ -30,7 +36,7 @@ function CoverImage(props: CoverImageProps) {
         bottom: 0,
         opacity: visible ? 1 : 0,
       }}
-      onLoad={onLoad}
+      onLoad={onImageLoad}
     />
   );
 }

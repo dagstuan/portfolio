@@ -72,16 +72,10 @@ const IndexPage = () => {
   );
 
   const setImageLoaded = React.useCallback((index: number) => {
-    console.log(`setLoaded ${index}`);
     setLoadedImages((loadedImages) => ({ ...loadedImages, [index]: true }));
   }, []);
 
-  const [visibleImage, setVisibleImage] = React.useState(
-    //Math.floor(Math.random() * coverImages.length)
-    0
-  );
-
-  console.log(`visibleImage ${visibleImage}`);
+  const [visibleImage, setVisibleImage] = React.useState(0);
 
   const nextImage = getNextImage(visibleImage, coverImages.length);
 
@@ -112,9 +106,9 @@ const IndexPage = () => {
               key={ci.title}
               title={ci.title}
               fluid={ci.image.fluid}
-              onLoad={() => setImageLoaded(index)}
+              index={index}
+              onLoad={setImageLoaded}
               loading={getLoading(index)}
-              isLoaded={loadedImages[index]}
               visible={index === visibleImage}
             />
           );
