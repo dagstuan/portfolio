@@ -34,10 +34,10 @@ export const query = graphql`
             src
             width
             height
-          }
-          fluid(maxWidth: 2500, quality: 75) {
-            ...GatsbyContentfulFluid_withWebp
             aspectRatio
+          }
+          fluid(maxHeight: 2500, maxWidth: 2500, quality: 75) {
+            ...GatsbyContentfulFluid_withWebp
           }
           file {
             details {

@@ -5,7 +5,7 @@ import { Image } from '../types/Image';
 const getImageAspectRatio = (image: Image) => {
   const imageWidth = image.image.file.details.image.width;
 
-  const imageHeight = imageWidth / image.image.fluid.aspectRatio;
+  const imageHeight = imageWidth / image.image.resize.aspectRatio;
 
   return imageWidth / imageHeight;
 };

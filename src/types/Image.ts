@@ -15,6 +15,7 @@ export interface ContentfulImageResize {
   src: string;
   width: string;
   height: string;
+  aspectRatio: number;
 }
 
 export interface ContentfulImage {
