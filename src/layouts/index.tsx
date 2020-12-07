@@ -54,6 +54,7 @@ const query = graphql`
         node {
           title
           slug
+          order
         }
       }
     }
@@ -66,6 +67,7 @@ type CategoryQueryReturn = {
       node: {
         title: string;
         slug: string;
+        order: number;
       };
     }[];
   };
@@ -102,6 +104,14 @@ const Layout: FC = ({ children }) => {
     [classes.menuOpenOverlayMenuOpen]: menuOpen,
   });
 
+  const sortedCategories = React.useMemo(
+    () =>
+      allContentfulCategory.edges.sort((a, b) =>
+        a.node.order > b.node.order ? 1 : -1
+      ),
+    [allContentfulCategory.edges]
+  );
+
   return (
     <HelmetProvider>
       <Helmet>
@@ -123,7 +133,7 @@ const Layout: FC = ({ children }) => {
         <div className={menuOverlayClass} onClick={closeMenu} />
 
         <Menu
-          categories={allContentfulCategory.edges}
+          categories={sortedCategories}
           menuOpen={menuOpen}
           toggleMenu={toggleMenu}
           closeMenu={closeMenu}
