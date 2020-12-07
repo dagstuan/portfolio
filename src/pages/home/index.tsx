@@ -32,7 +32,7 @@ const query = graphql`
             width
             height
           }
-          fluid(maxHeight: 4000, maxWidth: 4000, quality: 100) {
+          fluid(maxHeight: 4096, maxWidth: 4096, quality: 75) {
             ...GatsbyContentfulFluid_withWebp
           }
         }
@@ -45,7 +45,7 @@ const query = graphql`
             width
             height
           }
-          fluid(maxHeight: 4000, maxWidth: 4000, quality: 100) {
+          fluid(maxHeight: 4096, maxWidth: 4096, quality: 75) {
             ...GatsbyContentfulFluid_withWebp
           }
         }
