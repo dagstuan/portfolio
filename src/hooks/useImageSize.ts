@@ -14,8 +14,8 @@ export default function useImageSize(
   containerRef: RefObject<HTMLDivElement>,
   image: Image
 ) {
-  const [imageWidth, setImageWidth] = useState('0px');
-  const [imageHeight, setImageHeight] = useState('0px');
+  const [imageWidth, setImageWidth] = useState('100%');
+  const [imageHeight, setImageHeight] = useState('100%');
   const [containerWidth, setContainerWidth] = useState(0);
   const [containerHeight, setContainerHeight] = useState(0);
 
@@ -24,7 +24,6 @@ export default function useImageSize(
     if (windowWidth <= 750) {
       setImageWidth('100%');
       setImageHeight('100%');
-      return;
     }
 
     const newContainerWidth = containerRef.current?.offsetWidth ?? 0;
