@@ -9,22 +9,20 @@ import {
   useReducer,
 } from 'react';
 import Img from 'gatsby-image';
-import * as classNames from 'classnames';
 import useImageSize from '../hooks/useImageSize';
 import { Image } from '../types/Image';
 import useOnScreen from '../hooks/useOnScreen';
-import usePrevious from '../hooks/usePrevious';
 
 import * as classes from './category.module.less';
 import ImageZoom from './ImageZoom';
 import useKeyPress from '../hooks/useKeyPress';
 import { gtagEvent } from '../utils/gtagUtils';
+import classNames from 'classnames';
 
 type CategoryImageProps = {
   imageRef: RefObject<any>;
   image: Image;
   index: number;
-  critical: boolean;
   onImageLoad: (index: number) => void;
   onImageVisible: (index: number) => void;
 };
@@ -71,17 +69,9 @@ const categoryImageReducer = (
 };
 
 const CategoryImage = (props: CategoryImageProps) => {
-  const {
-    imageRef,
-    image,
-    index,
-    critical,
-    onImageLoad,
-    onImageVisible,
-  } = props;
+  const { imageRef, image, index, onImageLoad, onImageVisible } = props;
   const [isLoaded, setIsLoaded] = useState(false);
 
-  const previousCritical = usePrevious(critical);
   const containerRef = useRef<HTMLDivElement>(null);
 
   const visible = useOnScreen(containerRef);
@@ -134,9 +124,6 @@ const CategoryImage = (props: CategoryImageProps) => {
 
   const { imageWidth, imageHeight } = useImageSize(containerRef, image);
 
-  // Make sure we keep the image as critical if it was ever critical
-  const shouldBeCritical = (!isLoaded && critical) || previousCritical === true;
-
   return (
     <li ref={imageRef} className={classes.categoryElem}>
       <div
@@ -158,7 +145,7 @@ const CategoryImage = (props: CategoryImageProps) => {
             fluid={image.image.fluid}
             alt={image.title}
             style={{ width: '100%', height: '100%' }}
-            loading={shouldBeCritical ? 'eager' : 'lazy'}
+            loading="lazy"
           />
 
           {isLoaded && (

@@ -65,17 +65,15 @@ const CategoryPage = ({
 }: CategoryPageProps) => {
   const imageRefs = useRef([...images.map((_) => createRef<HTMLElement>())]);
   const [loadedImages, setLoadedImages] = React.useState<Array<number>>([]);
-  const [visibleImageIndex, setVisibleImageIndex] = useState<number>(0);
+  const [visibleImageIndex, setVisibleImageIndex] = useState<number>(-1);
 
   React.useEffect(() => {
-    if (!nProgress.isStarted()) {
+    if (!nProgress.isStarted() && !loadedImages.includes(visibleImageIndex)) {
       nProgress.start();
-    }
-
-    if (images.every((_, index) => loadedImages.includes(index))) {
+    } else if (loadedImages.includes(visibleImageIndex)) {
       nProgress.done();
     }
-  }, [loadedImages, images]);
+  }, [loadedImages, visibleImageIndex]);
 
   const onImageLoad = useCallback((index: number) => {
     setLoadedImages((loadedImages) => [...loadedImages, index]);
@@ -112,8 +110,6 @@ const CategoryPage = ({
     }
   }, [imageRefs, prevKeyPressed, nextKeyPressed]);
 
-  const loadAllImages = loadedImages.includes(visibleImageIndex);
-
   return (
     <>
       <Helmet>
@@ -136,7 +132,6 @@ const CategoryPage = ({
                 key={id}
                 index={index}
                 image={image}
-                critical={loadAllImages}
                 onImageLoad={onImageLoad}
                 onImageVisible={setVisibleImageIndexCallback}
               />

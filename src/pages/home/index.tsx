@@ -2,7 +2,7 @@ import * as React from 'react';
 import { useStaticQuery, graphql } from 'gatsby';
 import { FixedObject, FluidObject } from 'gatsby-image';
 import { Helmet } from 'react-helmet-async';
-import * as classNames from 'classnames';
+import classNames from 'classnames';
 
 import * as classes from './index.module.less';
 import * as layoutClasses from '../../layouts/layout.module.less';

@@ -2,12 +2,12 @@ import * as React from 'react';
 import { createPortal } from 'react-dom';
 import { Image } from '../types/Image';
 import * as nprogress from 'nprogress';
-import * as classNames from 'classnames';
 import { RefObject, useEffect, useCallback, memo } from 'react';
 
 import * as classes from './category.module.less';
 import useEventListener from '../hooks/useEventListener';
 import { ZoomState, ZoomAction } from './CategoryImage';
+import classNames from 'classnames';
 
 type ImageZoomProps = {
   state: ZoomState;
@@ -160,7 +160,7 @@ function ImageZoom(props: ImageZoomProps) {
         className={classNames(classes.imageZoomBackground, {
           [classes.imageZoomBackgroundOpen]: state.state === 'open',
         })}
-      ></div>
+      />
       <img
         className={classNames(classes.imageZoom, {
           [classes.imageZoomVisible]: state.visible,
